@@ -1,24 +1,19 @@
 ---
-import '../styles/global.css';
-const year = new Date().getFullYear();
+import Base from '../layouts/Base.astro';
+import BrainAtlas from '../components/atlas/BrainAtlas.astro';
+import { profile } from '../data/facts';
 ---
 
-<!doctype html>
-<html lang="fa" dir="rtl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="robots" content="noindex" />
-    <title>مهدیه گنجی‌منش — در حال ساخت</title>
-  </head>
-  <body class="grid min-h-dvh place-items-center p-6">
-    <main class="w-full max-w-xl text-center">
-      <p class="text-xs tracking-[0.2em] text-ink/50">MAHDIEH GANJIMANESH</p>
-      <h1 class="mt-4 text-4xl font-bold leading-tight">مهدیه گنجی‌منش</h1>
-      <p class="mt-3 text-sm leading-8 text-ink/70">
-        سایت در حال ساخت است. شش طرح اولیه به‌زودی برای بررسی اینجا قرار می‌گیرند.
-      </p>
-      <p class="mt-8 text-xs text-ink/40">© ${year}</p>
-    </main>
-  </body>
-</html>
+<Base
+  title="مغز، از نزدیک — مهدیه گنجی‌منش"
+  description="اطلس تعاملی مغز؛ روان‌شناسی شناختی و ارزیابی سازمانی بر پایه‌ی داده‌ی مغزی. مهدیه گنجی‌منش."
+  themeColor="#efe6d2"
+  bodyClass="atlas-body"
+>
+  <BrainAtlas
+    name={profile.name}
+    email={profile.email}
+    lead={profile.lead}
+    location={profile.location}
+  />
+</Base>

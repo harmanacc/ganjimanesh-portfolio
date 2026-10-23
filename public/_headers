@@ -1,0 +1,11 @@
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/brain-atlas/*.glb
+  Cache-Control: public, max-age=604800
+
+/brain-atlas/atlas.json
+  Cache-Control: public, max-age=3600
+
+/paper/*
+  Cache-Control: public, max-age=31536000, immutable

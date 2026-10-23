@@ -1,9 +1,4 @@
 /* Self-hosted via @fontsource — no Google Fonts CDN (unreliable in Iran). */
 @import "@fontsource-variable/vazirmatn/index.css";
-@import "@fontsource-variable/estedad/index.css";
-@import "@fontsource-variable/noto-naskh-arabic/index.css";
-@import "@fontsource/instrument-serif/latin-400.css";
-@import "@fontsource/instrument-serif/latin-400-italic.css";
-@import "@fontsource-variable/space-grotesk/index.css";
-@import "@fontsource-variable/jetbrains-mono/index.css";
-@import "@fontsource/lalezar/index.css";
+@import "@fontsource/gulzar/index.css";
+@import "@fontsource-variable/caveat/index.css";

@@ -1,105 +1,91 @@
-# BRIEF — مهدیه گنجی‌منش
+# BRIEF — مهدیه گنجی‌منش / اطلس مغز
 
-Decided 2026-10-23 with Arman. This file is the source of truth; demos must not
-contradict it.
+Pivoted 2026-10-23. **One page only.** The notebook and all earlier lab routes
+are removed; git history keeps them.
 
-## Positioning
+## Concept — «مغز، از نزدیک»
 
-**Personal brand across three identities — psychology leads.**
+A single anatomical plate on paper. The brain is the page: it turns under the
+hand, opens, and names its parts. The interface is the margin of a notebook —
+pencil, ink, one red pen — not a dashboard.
 
-Order of weight: **روانشناسی شناختی → مدیریت پروژه → طراحی و وب**. Design is
-the memorable twist, never the headline. Audience: organizations and HR
-decision-makers, research/academic peers, and (secondarily) design clients.
+The page is both the portfolio and the proof: she reads organizations through
+brain data, so the visitor reads a brain first.
 
-No single job target. The site answers: *«این آدم کیست و چه کاری از او برمی‌آید؟»*
+## What a visitor must understand
 
-## Hard facts (verified)
+1. She is a **cognitive scientist / psychologist**, not a designer.
+2. She does **organizational assessment based on brain data** — the rare offer.
+3. The atlas is a working instrument, not decoration.
+4. How to email her.
 
-- Name: **مهدیه گنجی‌منش** — Mahdieh Ganjimanesh
-- Domain: **mahdiehgangi.ir**
-- Email (only public contact): **ganimanesh_mahdieh@yahoo.com**
-- Location: تهران، ایران
-- **No portrait, no phone number, no photo of her.** Text and generated
-  graphics only.
-- Client organizations must be anonymized. Institutes/universities may be named.
-- **Never invent metrics, clients, outcomes, testimonials, or awards.**
-- Old CVs in `assets-inbox/old-cv/` are background only — do not reproduce them.
+## One page, four moves
 
-### Education
+| Move | What happens |
+|---|---|
+| ورود | the brain settles onto the paper; name and offer appear |
+| چرخاندن | drag / pinch; the brain is the hero |
+| باز کردن | search a structure or choose a reading layer; the cortex fades to a shell |
+| خواندن | a paper drawer gives the Persian name, Latin name, path, and a short note |
 
-- کارشناسی روانشناسی — دانشکده رفاه — ۱۳۹۶ تا ۱۴۰۰
-- کارشناسی ارشد علوم شناختی، گرایش روانشناسی شناختی — مؤسسه علوم شناختی —
-  از ۱۴۰۲، در حال تحصیل
+No navbar, no page transitions, no card grid. One drawer, one layer strip,
+one email.
 
-### Current roles
+## Visual system
 
-- مدیر پروژه — کلینیک ایماژ
-- همکار ارزیابی سازمانی مبتنی بر نوار مغزی — انستیتو مغز ایماژ
-- ارزیاب روانشناختی و تولیدکننده محتوا — رومینر — ۱۴۰۲ تا اکنون
-- طراح، پشتیبان و مسئول سایت — مؤسسه تیبو — ۱۴۰۱ تا اکنون
+- **Paper:** sheet `#efe6d2`, fiber overlay `public/paper/fiber.png`, soft
+  vignette. Never pure white.
+- **Ink:** `#2a241c`. Pencil `#6f6353`. Red pen `#b23a2b`. Blue pen `#2f4f8f`.
+- **Brain:** bone `#dfcfb0`, rendered with a generated pencil-hatch matcap.
+  Internal structures use muted colored-pencil tints. Selection is the red pen;
+  hover is the blue pen.
+- **Type:** `Gulzar` for the title and structure names; `Vazirmatn` for body and
+  UI; `Caveat` for Latin names only. No sans-serif headline.
+- **Rules:** hairline 1px at 20–30% ink; paper drawer with a taped top and a
+  faint red margin line. One soft paper shadow.
+- **Restraint:** the brain is the only loud element. Everything else is quiet.
 
-### Past roles
+## Interaction
 
-- کارشناس پژوهش — دانشکده رفاه — ۱۴۰۰ تا ۱۴۰۱
-- ارزیاب شناختی CANTAB — مرکز مشاوره و روانشناسی شایسته‌پرور — ۱۴۰۰ تا ۱۴۰۱
-- پشتیبانی فنی کلاس‌های مجازی — کانون زبان ایران — ۱۳۹۹ تا ۱۴۰۱
-- تولیدکننده محتوا و مسئول اجرایی کارگاه‌ها — کلینیک خانه آینه — ۱۳۹۸ تا ۱۳۹۹
-- کارشناس مارکتینگ و مسئول اجرایی کارگاه‌ها — کلینیک خانواده پویا — ۱۳۹۷ تا ۱۳۹۸
-- کارآموز تحریک مغناطیسی مغز (TMS) — کلینیک توانبخشی سکته مغزی تیبسم — ۱۴۰۲
-
-### Certifications / training
-
-QEEG، نوروفیدبک و لورتا، tDCS، NIBS (دانشگاه تهران و مؤسسه فارمد)، TMS،
-ارزیابی شناختی CANTAB، طراحی تست‌های شناختی با پایتون، پایتون مقدماتی (CS50)،
-تربیت پژوهشگر، تربیت مشاور پیش از ازدواج، مایندفولنس و ذهن‌آگاهی، فن ترجمه انگلیسی.
-
-### Research
-
-پایان‌نامه ارشد: **«رابطه جهت‌گیری عملکردی و تسلطی با تفکر واگرا و همگرا با نقش
-تعدیل‌گر گشودگی به تجربه»**
-
-### Skills
-
-وردپرس، سئو، تولید محتوا، فتوشاپ، تدوین ویدیو (PowerDirector)، پایتون، HTML/CSS.
-
-### Showable work
-
-1. ارزیابی سازمانی مبتنی بر نوار مغزی — انستیتو مغز ایماژ (clients anonymized)
-2. مدیریت پروژه — کلینیک ایماژ
-3. وب‌سایت‌های وردپرسی — کلینیک آینه، مؤسسه تیبو (names only, **no links**)
-4. پژوهش — پایان‌نامه ارشد
-5. طراحی گرافیک و سوشال — بیش از ۱۰ پروژه فریلنسری
-
-## Copy rules
-
-- Persian, RTL, first person («من»), نیمه‌رسمی — credible, human, no corporate fog.
-- Persian digits (۰–۹). Respect ZWNJ (نیم‌فاصله). No letter-spacing on Persian.
-- Ban list: «خلاق و نوآور»، «با passion»، «همیشه در حال یادگیری»، «سفر من»،
-  «دنیای رنگ‌ها»، emoji in place of icons, three-card feature rows, purple
-  gradients, generic glassmorphism.
-- No fake numbers. If a quantity isn't known, describe the work instead.
-- Every section must survive the question: *«چه چیزی را ثابت می‌کند؟»*
-
-## Demos (six, one route each)
-
-| # | Route | Direction | Palette |
-|---|-------|-----------|---------|
-| 01 | `/demos/01-lab` | آزمایشگاه — clinical, EEG data-viz | white / ink / teal / coral |
-| 02 | `/demos/02-paper` | کاغذ و مرکب — warm editorial | cream / ink / rust / olive |
-| 03 | `/demos/03-archive` | آرشیو سرد — dark cinematic | near-black / bone / acid |
-| 04 | `/demos/04-mono` | تک‌رنگ + برق — bento, cobalt | off-white / black / #2B3BFF |
-| 05 | `/demos/05-neural` | نقشه مغز — neural, atmospheric | navy / blue-violet / glow |
-| 06 | `/demos/06-swiss` | سوئیسی — strict grid, restrained | bone / black / red |
-
-Each demo writes its own copy. Tone is being tested, not assumed.
+- **Orbit:** pointer drag, wheel/pinch zoom, double-click reset, arrow keys,
+  `+`/`−`, `R`.
+- **Select:** click a structure or a search result. Surface structures keep the
+  cortex visible and mark the patch red. Internal structures fade the cortex to
+  a faint shell and fly to the region.
+- **Layers:** توجه، خودتنظیمی، حافظه، هیجان، پاداش، زبان، خواب و ریتم. Each
+  layer highlights a defensible set of structures and opens a short reading note.
+- **Display:** opacity and a clipping plane (sagittal / horizontal / coronal).
+- **Deep links:** `/#<structure-code>` selects a region on load.
+- **Accessibility:** real buttons and inputs, visible focus, live announcements,
+  `Esc` closes/deselects, reduced motion respected.
+- **No JS / no WebGL:** a plain message and the email address.
 
 ## Technical
 
-- Astro 7, static, `output: 'static'`.
-- Shared: `src/styles/global.css`, `src/layouts/Base.astro`, `src/data/facts.ts`.
-- Self-hosted fonts only (`@fontsource*`), no Google Fonts CDN (unreliable in Iran).
-- JS budget: prefer CSS + IntersectionObserver. GSAP/Lenis allowed if justified.
-- Must respect `prefers-reduced-motion`, keyboard nav, visible focus, 4.5:1 body
-  contrast, 390/768/1440 breakpoints.
-- Generated SVG/CSS/canvas visuals only. No stock photos, no external images.
-- Deploy target: Cloudflare. Review: local screenshots at 390/768/1440.
+- Astro 7, static, Cloudflare.
+- three.js with meshopt-compressed GLBs, generated matcap, local clipping.
+- Initial surface pack ~668 KB; internal pack ~2.2 MB loaded on demand.
+- Mobile: the drawer becomes a bottom sheet; the brain scales to fit.
+- Budget: keep the page under ~3 MB transferred; no external CDN.
+
+## Assets and attribution
+
+- 3D region meshes and the base hierarchy are extracted from the
+  **Neurotorium 3D Brain Atlas** (Lundbeck Foundation) for a research prototype.
+  See `public/brain-atlas/ATTRIBUTION.md`. For a public commercial launch,
+  obtain permission or replace the meshes with an open-licensed atlas.
+- Persian names, short descriptions, and reading layers in
+  `public/brain-atlas/atlas.json` are original.
+- The committed GLBs are already merged and meshopt-compressed; raw source
+  assets are not part of the repository.
+
+## Facts (verified)
+
+Name: مهدیه گنجی‌منش · mahdiehgangi.ir · ganimanesh_mahdieh@yahoo.com · تهران.
+MSc Cognitive Sciences (in progress), BA Psychology (Rafah). Project manager at
+کلینیک ایماژ. Organizational assessment based on brain data at انستیتو مغز ایماژ.
+QEEG, neurofeedback, tDCS, NIBS, TMS, CANTAB, Python test design. WordPress sites
+for کلینیک آینه and مؤسسه تیبو (names only). 10+ freelance design projects.
+Thesis: «رابطه جهت‌گیری عملکردی و تسلطی با تفکر واگرا و همگرا با نقش تعدیل‌گر
+گشودگی به تجربه» — in progress, not defended.
+No photo, no phone. Email only. Client organizations anonymized.

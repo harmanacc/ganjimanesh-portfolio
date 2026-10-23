@@ -1,17 +1,18 @@
-@import "tailwindcss";
 @import "./fonts.css";
 
-@theme {
+:root {
   --font-body: "Vazirmatn Variable", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Estedad Variable", "Vazirmatn Variable", ui-sans-serif, sans-serif;
-  --font-naskh: "Noto Naskh Arabic Variable", "Vazirmatn Variable", serif;
-  --font-serif: "Instrument Serif", Georgia, serif;
-  --font-grotesk: "Space Grotesk Variable", ui-sans-serif, sans-serif;
-  --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
-  --font-loud: "Lalezar", "Estedad Variable", sans-serif;
+  --font-hand: "Gulzar", "Vazirmatn Variable", serif;
+  --font-display: "Gulzar", "Vazirmatn Variable", serif;
+  --font-latin-hand: "Caveat Variable", cursive;
 
-  --color-ink: #1a1712;
-  --color-paper: #f3ede2;
+  --color-kraft: #b7a184;
+  --color-paper: #efe6d2;
+  --color-paper-deep: #e3d6ba;
+  --color-ink: #2a241c;
+  --color-ink-soft: #6f6353;
+  --color-red-pen: #b23a2b;
+  --color-blue-pen: #2f4f8f;
 }
 
 *,
@@ -23,11 +24,14 @@
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  background: var(--color-kraft);
 }
 
 body {
   margin: 0;
   font-family: var(--font-body);
+  color: var(--color-ink);
+  background: var(--color-kraft);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
 }
@@ -43,10 +47,33 @@ a {
   color: inherit;
 }
 
+button {
+  font: inherit;
+  color: inherit;
+}
+
+::selection {
+  background: rgba(178, 58, 43, 0.18);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-red-pen);
+  outline-offset: 4px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
   *,
   *::before,
   *::after {
