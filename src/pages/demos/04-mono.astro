@@ -1,0 +1,817 @@
+---
+import Base from '../../layouts/Base.astro';
+import MarqueeStrip from '../../components/demos/mono/MarqueeStrip.astro';
+import BentoTile from '../../components/demos/mono/BentoTile.astro';
+import AsteriskMark from '../../components/demos/mono/AsteriskMark.astro';
+import OrbitDot from '../../components/demos/mono/OrbitDot.astro';
+import HoverPlate from '../../components/demos/mono/HoverPlate.astro';
+import { profile, education, certifications, thesis, work, skills, principles, experience } from '../../data/facts';
+
+const rowNumbers = ['۰۱', '۰۲', '۰۳', '۰۴', '۰۵'];
+const roleList = [...experience.filter((e) => e.current), ...experience.filter((e) => !e.current)];
+---
+
+<Base title="مهدیه گنجی‌منش — تک‌رنگ + برق" themeColor="#fafaf7" bodyClass="mono-body">
+  <main class="mono-page">
+    <MarqueeStrip class="mono-marquee--top" />
+
+    <header class="mono-top">
+      <a class="mono-home" href="/demos">← شش طرح</a>
+      <span class="mono-top__meta">mahdiehgangi.ir · تهران</span>
+    </header>
+
+    {/* ————— پرده ۰ — سیگنال ————— */}
+    <section class="mono-signal" aria-labelledby="mono-h1">
+      <div class="mono-signal__mark mono-pulse">
+        <AsteriskMark class="mono-asterisk" />
+      </div>
+      <h1 id="mono-h1" class="mono-signal__name">مهدیه گنجی‌منش</h1>
+      <p class="mono-signal__line">
+        سؤال من همیشه یکی بوده: در سرِ آدم‌ها چه می‌گذرد — و چطور می‌شود آن را سنجید.
+      </p>
+      <p class="mono-signal__status">
+        <span class="mono-signal__dot" aria-hidden="true"></span>
+        دانشجوی کارشناسی ارشد علوم شناختی · مدیر پروژهٔ کلینیک ایماژ
+      </p>
+    </section>
+
+    {/* ————— پرده ۱ — روش ————— */}
+    <section class="mono-act" aria-labelledby="mono-method">
+      <p class="mono-label mono-label--act" id="mono-method">پردهٔ ۱ — روش</p>
+      <div class="mono-bento">
+        {/* the 2×2 anchor: psychology */}
+        <BentoTile variant="grid" class="mono-tile--anchor mono-reveal mono-delay-0">
+          <p class="mono-tag">عدسی ۱ — روان‌شناسی شناختی</p>
+          <h2 class="mono-tile__big">
+            مغز، برای من فقط یک عضو نیست؛
+            جایی است که رفتار از آن می‌گذرد.
+          </h2>
+          <p class="mono-tile__note">
+            کارم با سنجش شناختی، نوار مغزی و روش‌های تحریک غیرتهاجمی —
+            QEEG، CANTAB، tDCS، TMS. اول اندازه می‌گیرم، بعد حرف می‌زنم.
+          </p>
+        </BentoTile>
+
+        {/* satellite: project management */}
+        <BentoTile class="mono-tile--pm mono-reveal mono-delay-1">
+          <p class="mono-tag">عدسی ۲ — مدیریت پروژه</p>
+          <h2 class="mono-tile__mid">در کلینیک ایماژ</h2>
+          <p class="mono-tile__note">
+            پروژه‌های درمانی و آموزشی را طراحی می‌کنم و پیش می‌برم؛
+            تیم، زمان‌بندی و اجرا ضرب‌الاجل‌های واقعی می‌شناسند.
+          </p>
+        </BentoTile>
+
+        {/* satellite: orbit + principles */}
+        <BentoTile class="mono-tile--orbit mono-reveal mono-delay-2">
+          <OrbitDot class="mono-orbit" />
+          <ul class="mono-principles">
+            {principles.map((p) => <li>{p}</li>)}
+          </ul>
+        </BentoTile>
+
+        {/* satellite: design, as a type specimen */}
+        <BentoTile variant="specimen" class="mono-tile--design mono-reveal mono-delay-2">
+          <p class="mono-tag">عدسی ۳ — طراحی و وب</p>
+          <p class="mono-tile__note">
+            وردپرس، سئو، فتوشاپ و HTML/CSS؛ سایت‌ها و محتوایی که ساخته‌ام
+            هنوز درست کار می‌کنند.
+          </p>
+        </BentoTile>
+
+        {/* the wide statement tile */}
+        <BentoTile variant="arcs" class="mono-tile--wide mono-reveal mono-delay-3">
+          <p class="mono-label">چرا این سه با هم؟</p>
+          <p class="mono-tile__note">
+            چون ارزیابی بدون اجرا تبدیل به گزارش می‌شود، اجرا بدون علم
+            تبدیل به حدس، و علم بدون طراحی کسی را نمی‌رساند. من پیوندِ
+            این سه بوده‌ام.
+          </p>
+        </BentoTile>
+      </div>
+    </section>
+
+    {/* ————— پرده ۲ — میدان ————— */}
+    <section class="mono-act" aria-labelledby="mono-field">
+      <p class="mono-label mono-label--act" id="mono-field">پردهٔ ۲ — میدان</p>
+      <p class="mono-act__intro">
+        کجای دنیای واقعی کار کرده‌ام — سازمان‌ها محرمانه می‌مانند، نوع کار نمی‌ماند.
+      </p>
+
+      <HoverPlate class="mono-plate--floating" />
+
+      <ul class="mono-worklist">
+        {
+          work.map((w, i) => (
+            <li
+              class="mono-row"
+              tabindex="0"
+              data-idx={rowNumbers[i]}
+              data-title={w.title}
+              data-org={w.org}
+              data-kind={w.kind}
+              data-sum={w.summary}
+            >
+              <span class="mono-row__n" aria-hidden="true">{rowNumbers[i]}</span>
+              <span class="mono-row__title">{w.title}</span>
+              <span class="mono-row__org">{w.org}</span>
+              <span class="mono-row__kind">{w.kind}</span>
+              <span class="mono-row__inline">
+                <span class="mono-row__inline-org">{w.org} · {w.role}</span>
+                <span class="mono-row__inline-sum">{w.summary}</span>
+              </span>
+              <span class="mono-sr-only">{w.summary}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    {/* ————— پرده ۳ — اثر ————— */}
+    <section class="mono-act" aria-labelledby="mono-effect">
+      <p class="mono-label mono-label--act" id="mono-effect">پردهٔ ۳ — اثر</p>
+
+      <div class="mono-effect">
+        <div class="mono-research mono-reveal">
+          <p class="mono-label">پژوهش</p>
+          <h2 class="mono-research__title">{thesis.title}<span class="mono-ast">*</span></h2>
+          <p class="mono-research__meta">{thesis.status} · {thesis.field} · مؤسسه علوم شناختی</p>
+          <p class="mono-research__foot">
+            * جایی که سنجشِ تفکر با شخصیت گره می‌خورد — دقیقاً تقاطعِ دو دنیای من.
+          </p>
+        </div>
+
+        <div class="mono-record mono-reveal">
+          <p class="mono-label mono-label--sub">تحصیلات</p>
+          {education.map((e) => (
+            <div class="mono-ed">
+              <p class="mono-ed__deg">{e.degree}{e.field && ` — ${e.field}`}</p>
+              <p class="mono-ed__org">{e.org} · {e.period}{e.note && ` · ${e.note}`}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <p class="mono-label mono-label--sub">دوره‌ها و گواهی‌ها</p>
+      <ul class="mono-chips">
+        {certifications.map((c) => <li class="mono-chip">{c}</li>)}
+      </ul>
+      <p class="mono-label mono-label--sub">ابزارها</p>
+      <ul class="mono-chips">
+        {skills.map((s) => <li class="mono-chip mono-chip--muted">{s}</li>)}
+      </ul>
+
+      <p class="mono-label mono-label--sub">مسیر اجرا</p>
+      <ol class="mono-roles">
+        {roleList.map((e) => (
+          <li class="mono-role">
+            <span class="mono-role__period">{e.period}</span>
+            <span class="mono-role__body">
+              <span class="mono-role__role">{e.role}</span>
+              <span class="mono-role__org">{e.org}</span>
+            </span>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    {/* ————— پرده ۴ — دعوت ————— */}
+    <section class="mono-band" aria-labelledby="mono-invite">
+      <p class="mono-label mono-label--invert" id="mono-invite">پردهٔ ۴ — دعوت</p>
+      <p class="mono-band__line">
+        اگر ارزیابی سازمانی، پژوهش مشترک یا سایتی دارید که باید درست
+        ساخته شود — ایمیل بزنید؛ خودم دنبالش می‌کنم.
+      </p>
+      <a class="mono-band__mail" href={`mailto:${profile.email}`}>{profile.email}</a>
+      <p class="mono-band__foot">
+        تهران، ایران · <span class="mono-latin mono-latin--invert">Mahdieh Ganjimanesh</span>
+      </p>
+      <AsteriskMark class="mono-band__mark" />
+    </section>
+
+    <footer class="mono-foot">
+      <a href="/demos">← بازگشت به فهرست طرح‌ها</a>
+      <span>۰۴ — تک‌رنگ + برق</span>
+    </footer>
+  </main>
+</Base>
+
+<script>
+  // دو رفتار، نه بیشتر: reveal پرده‌ها + پلیتی که دنبال نشانگر می‌رود.
+  const fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ۱) Staggered act reveal — 70ms sibling stagger
+  const revealNodes = document.querySelectorAll('.mono-reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      for (const en of entries) {
+        if (en.isIntersecting) {
+          en.target.classList.add('mono-is-in');
+          io.unobserve(en.target);
+        }
+      }
+    }, { threshold: 0.12 });
+    revealNodes.forEach((n) => io.observe(n));
+  } else {
+    revealNodes.forEach((n) => n.classList.add('mono-is-in'));
+  }
+
+  // ۲) Cursor-follow work plate — rAF + translate3d, desktop pointer only
+  const plate = document.querySelector('.mono-plate--floating');
+  if (fine && !reduced && plate) {
+    const rows = document.querySelectorAll('.mono-row');
+    const set = (sel: string, text: string) => {
+      (plate.querySelector(sel) as HTMLElement).textContent = text;
+    };
+    let tx = 0, ty = 0, cx = 0, cy = 0, raf: number | null = null, live = false;
+
+    const tick = () => {
+      cx += (tx - cx) * 0.18;
+      cy += (ty - cy) * 0.18;
+      plate.style.transform = 'translate3d(' + cx + 'px,' + cy + 'px,0)';
+      if (Math.abs(tx - cx) > 0.35 || Math.abs(ty - cy) > 0.35) {
+        raf = requestAnimationFrame(tick);
+      } else raf = null;
+    };
+    const wake = () => { if (!raf) raf = requestAnimationFrame(tick); };
+
+    rows.forEach((row) => {
+      const el = row as HTMLElement;
+      el.addEventListener('mouseenter', () => {
+        const d = el.dataset;
+        set('.mono-plate__idx', d.idx || '');
+        set('.mono-plate__kind', d.kind || '');
+        set('.mono-plate__title', d.title || '');
+        set('.mono-plate__org', d.org || '');
+        set('.mono-plate__line', d.sum || '');
+        live = true;
+        plate.classList.add('mono-plate--on');
+        cx = tx; cy = ty; // snap on visit, then trail the cursor
+      });
+      el.addEventListener('mouseleave', () => {
+        live = false;
+        plate.classList.remove('mono-plate--on');
+      });
+      el.addEventListener('mousemove', (ev) => {
+        const e = ev as MouseEvent;
+        tx = e.clientX + 26;
+        ty = e.clientY + 20;
+        if (live) wake();
+      });
+    });
+  }
+</script>
+
+<style is:global>
+  /* ═══ tokens ═══ */
+  .mono-body {
+    --mono-bg: #fafaf7;
+    --mono-ink: #0d0d0d;
+    --mono-muted: #6b6b6b;
+    --mono-faint: rgba(13, 13, 13, 0.38);
+    --mono-accent: #2b3bff;
+    --mono-accent-soft: rgba(43, 59, 255, 0.14);
+    --mono-rule: rgba(13, 13, 13, 0.12);
+    --mono-rule-strong: rgba(13, 13, 13, 0.3);
+
+    --mono-display: var(--font-display);
+    --mono-body-font: var(--font-body);
+    --mono-latin: var(--font-serif);
+    --mono-mono: var(--font-mono);
+
+    --mono-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --mono-ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+    --mono-linear: linear;
+    --mono-dur-press: 120ms;
+    --mono-dur-ui: 180ms;
+    --mono-dur-enter: 420ms;
+    --mono-dur-scene: 720ms;
+    --mono-stagger: 70ms;
+
+    background: var(--mono-bg);
+    color: var(--mono-ink);
+    font-family: var(--mono-body-font);
+  }
+
+  .mono-page {
+    min-height: 100dvh;
+    padding: clamp(0.75rem, 2vw, 1.75rem) clamp(1rem, 4vw, 2.75rem);
+  }
+  .mono-frame, .mono-page > * {
+    max-width: 76rem;
+    margin-inline: auto;
+  }
+  .mono-sr-only {
+    position: absolute;
+    width: 1px; height: 1px;
+    clip-path: inset(50%);
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  /* ═══ marquee — 30s linear ═══ */
+  .mono-marquee--top {
+    border-block: 1px solid var(--mono-rule);
+    padding-block: 0.55rem;
+  }
+  .mono-marquee {
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .mono-marquee__track {
+    display: inline-flex;
+    animation: mono-marquee 30s var(--mono-linear) infinite;
+  }
+  .mono-marquee:hover .mono-marquee__track { animation-play-state: paused; }
+  .mono-marquee__chunk {
+    font-family: var(--mono-mono);
+    font-size: 0.7rem;
+    color: var(--mono-faint);
+    padding-inline: 0.75rem;
+    flex-shrink: 0;
+  }
+  @keyframes mono-marquee {
+    from { transform: translateX(50%); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ═══ top bar ═══ */
+  .mono-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-block: 1rem 2.75rem;
+  }
+  .mono-home {
+    font-family: var(--mono-mono);
+    font-size: 0.75rem;
+    color: var(--mono-ink);
+    padding-bottom: 2px;
+    border-bottom: 1px solid var(--mono-accent);
+  }
+  .mono-home:hover { color: var(--mono-accent); }
+  .mono-top__meta {
+    font-family: var(--mono-mono);
+    font-size: 0.7rem;
+    color: var(--mono-muted);
+  }
+
+  /* ═══ act structure ═══ */
+  .mono-act {
+    padding-block: clamp(2.75rem, 6vw, 5rem);
+    border-top: 1px solid var(--mono-rule);
+  }
+  .mono-label {
+    font-family: var(--mono-mono);
+    font-size: 0.7rem;
+    color: var(--mono-muted);
+    margin: 0 0 1.75rem;
+  }
+  .mono-label--act { color: var(--mono-accent); }
+  .mono-label--sub { margin-top: 3rem; }
+  .mono-label--invert { color: rgba(250, 250, 247, 0.75); }
+  .mono-latin {
+    font-family: var(--mono-latin);
+    font-style: italic;
+    color: var(--mono-accent);
+  }
+  .mono-latin--invert { color: #c3caff; }
+  .mono-act__intro {
+    font-family: var(--mono-display);
+    font-weight: 700;
+    font-size: 1.35rem;
+    line-height: 1.95;
+    max-width: 44ch;
+    margin: 0 0 2.75rem;
+  }
+
+  /* ═══ act ۰ — signal ═══ */
+  .mono-signal {
+    max-width: 76rem;
+    margin-inline: auto;
+    padding-block: clamp(1.5rem, 4vw, 3rem) clamp(3rem, 7vw, 5.5rem);
+  }
+  .mono-signal__mark { width: 30px; margin-bottom: 2rem; }
+  .mono-pulse { animation: mono-pulse 1.1s var(--mono-ease-in-out) 1 both; }
+  @keyframes mono-pulse {
+    from { transform: scale(0.6); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  .mono-asterisk { width: 100%; height: auto; display: block; }
+  .mono-signal__name {
+    font-family: var(--mono-display);
+    font-weight: 800;
+    font-size: clamp(2.5rem, 6vw, 5.5rem);
+    line-height: 1.15;
+    margin: 0 0 1.5rem;
+  }
+  .mono-signal__line {
+    font-family: var(--mono-display);
+    font-weight: 700;
+    font-size: clamp(1.25rem, 2.6vw, 1.9rem);
+    line-height: 1.85;
+    max-width: 34ch;
+    margin: 0 0 2rem;
+  }
+  .mono-signal__status {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    font-family: var(--mono-mono);
+    font-size: 0.72rem;
+    line-height: 1.8;
+    color: var(--mono-muted);
+    margin: 0;
+  }
+  .mono-signal__dot {
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: var(--mono-accent);
+    box-shadow: 0 0 0 4px var(--mono-accent-soft);
+    flex-shrink: 0;
+  }
+
+  /* ═══ act ۱ — bento map ═══ */
+  .mono-bento {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 14px;
+  }
+
+  .mono-tile {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--mono-ink);
+    border-radius: 0; /* sharp — the grid's own statement */
+    background: var(--mono-bg);
+    padding: clamp(1.4rem, 2.8vw, 2.25rem);
+    transition: background-color var(--mono-dur-ui) var(--mono-ease-out);
+  }
+  .mono-tile__fill {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+  .mono-tile__content { position: relative; z-index: 1; }
+
+  .mono-tile--anchor { grid-column: span 6; grid-row: span 2; }
+  .mono-tile--pm { grid-column: span 3; }
+  .mono-tile--orbit { grid-column: span 3; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; }
+  .mono-tile--design { grid-column: span 3; }
+  .mono-tile--wide { grid-column: span 6; }
+
+  .mono-orbit {
+    /* the single soft element — everything else is 0 */
+    border-radius: 999px;
+    width: clamp(72px, 18vw, 112px);
+    color: var(--mono-ink);
+  }
+  .mono-principles {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-family: var(--mono-display);
+    font-weight: 700;
+    font-size: clamp(0.98rem, 1.5vw, 1.2rem);
+    display: grid;
+    gap: 0.5rem;
+    text-align: center;
+  }
+
+  .mono-tag {
+    font-family: var(--mono-mono);
+    font-size: 0.68rem;
+    color: var(--mono-accent);
+    margin: 0 0 1.4rem;
+  }
+  .mono-tile__big {
+    font-family: var(--mono-display);
+    font-weight: 800;
+    font-size: clamp(1.45rem, 3vw, 2.4rem);
+    line-height: 1.65;
+    margin: 0 0 1.5rem;
+  }
+  .mono-tile__big .mono-latin { font-size: 0.9em; }
+  .mono-tile__mid {
+    font-family: var(--mono-display);
+    font-weight: 800;
+    font-size: clamp(1.15rem, 2vw, 1.55rem);
+    line-height: 1.6;
+    margin: 0 0 0.9rem;
+  }
+  .mono-tile__note {
+    font-size: 0.94rem;
+    line-height: 2.05;
+    color: #3a3a3a;
+    margin: 0;
+    max-width: 42ch;
+  }
+  .mono-tile--anchor .mono-tile__note { max-width: 46ch; }
+
+  /* ═══ act ۲ — میدان work rows ═══ */
+  .mono-worklist {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .mono-row {
+    display: grid;
+    grid-template-columns: 3.25rem 5fr 3fr auto;
+    align-items: baseline;
+    gap: 1.25rem;
+    padding: 1.5rem 0.75rem;
+    border-bottom: 1px solid var(--mono-rule);
+    cursor: default;
+    transition: background-color var(--mono-dur-ui) var(--mono-ease-out), transform var(--mono-dur-press) var(--mono-ease-out);
+  }
+  .mono-worklist .mono-row:first-child { border-top: 1px solid var(--mono-ink); }
+  .mono-row:hover, .mono-row:focus-visible {
+    background-color: #f0f0ea;
+  }
+  .mono-row:active { transform: scale(0.96); }
+
+  .mono-row__n {
+    font-family: var(--mono-mono);
+    font-size: 0.72rem;
+    color: var(--mono-faint);
+  }
+  .mono-row__title {
+    font-family: var(--mono-display);
+    font-weight: 800;
+    font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+    max-width: 100%;
+    transition: color var(--mono-dur-ui) var(--mono-ease-out);
+  }
+  .mono-row:hover .mono-row__title, .mono-row:focus-visible .mono-row__title { color: var(--mono-accent); }
+  .mono-row__org { color: var(--mono-muted); font-size: 0.9rem; }
+  .mono-row__kind {
+    font-family: var(--mono-mono);
+    font-size: 0.68rem;
+    color: var(--mono-ink);
+    justify-self: start;
+    padding: 0.2rem 0.55rem;
+    border: 1px solid var(--mono-rule-strong);
+    transition: background-color var(--mono-dur-ui) var(--mono-ease-out), border-color var(--mono-dur-ui) var(--mono-ease-out), color var(--mono-dur-ui) var(--mono-ease-out);
+  }
+  .mono-row:hover .mono-row__kind, .mono-row:focus-visible .mono-row__kind {
+    border-color: var(--mono-accent);
+    background: var(--mono-accent);
+    color: var(--mono-bg);
+  }
+  .mono-row__inline { display: none; }
+
+  /* the floating plate component */
+  .mono-plate {
+    position: fixed;
+    inset-inline-end: 0;
+    inset-block-start: 0;
+    width: min(21.5rem, 290px);
+    background: var(--mono-ink);
+    color: var(--mono-bg);
+    padding: 1.35rem 1.5rem 1.5rem;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    will-change: transform;
+    z-index: 40;
+    border-block-start: 3px solid var(--mono-accent);
+    display: none;
+  }
+  .mono-plate--on { opacity: 1; visibility: visible; }
+  .mono-plate__idx {
+    font-family: var(--mono-mono);
+    font-size: 1.4rem;
+    color: var(--mono-accent);
+    display: block;
+    margin-bottom: 0.9rem;
+  }
+  .mono-plate__kind {
+    font-family: var(--mono-mono);
+    font-size: 0.66rem;
+    color: #9aa4ff;
+    margin: 0 0 0.6rem;
+  }
+  .mono-plate__title {
+    font-family: var(--mono-display);
+    font-weight: 800;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin: 0 0 0.45rem;
+  }
+  .mono-plate__org {
+    font-family: var(--mono-mono);
+    font-size: 0.68rem;
+    color: rgba(250, 250, 247, 0.62);
+    margin: 0 0 0.85rem;
+  }
+  .mono-plate__line {
+    font-size: 0.84rem;
+    line-height: 1.95;
+    color: rgba(250, 250, 247, 0.85);
+    margin: 0;
+    padding-top: 0.9rem;
+    border-top: 1px solid rgba(250, 250, 247, 0.16);
+  }
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .mono-plate { display: block; }
+  }
+
+  /* ═══ act ۳ — اثر ═══ */
+  .mono-effect {
+    display: grid;
+    grid-template-columns: 7fr 4fr;
+    gap: clamp(1.5rem, 4vw, 4rem);
+    align-items: start;
+  }
+  .mono-research__title {
+    font-family: var(--mono-display);
+    font-weight: 800;
+    font-size: clamp(1.3rem, 2.6vw, 1.95rem);
+    line-height: 1.8;
+    margin: 0 0 0.9rem;
+  }
+  .mono-ast {
+    font-family: var(--mono-mono);
+    color: var(--mono-accent);
+    margin-inline-start: 0.2rem;
+  }
+  .mono-research__meta {
+    font-family: var(--mono-mono);
+    font-size: 0.7rem;
+    color: var(--mono-muted);
+    margin: 0 0 1.25rem;
+  }
+  .mono-research__foot {
+    font-size: 0.85rem;
+    line-height: 2;
+    color: #3a3a3a;
+    margin: 0;
+    max-width: 40ch;
+  }
+  .mono-ed { margin-bottom: 1.35rem; }
+  .mono-ed__deg { font-family: var(--mono-display); font-weight: 700; font-size: 0.98rem; margin: 0 0 0.25rem; }
+  .mono-ed__org { font-size: 0.8rem; color: var(--mono-muted); margin: 0; }
+
+  .mono-chips {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+  }
+  .mono-chip {
+    font-size: 0.82rem;
+    line-height: 1.7;
+    border: 1px solid var(--mono-ink);
+    border-radius: 0; /* even chips obey the grid */
+    padding: 0.4rem 0.95rem;
+    cursor: default;
+    transition: background-color var(--mono-dur-press) var(--mono-ease-out), color var(--mono-dur-press) var(--mono-ease-out), transform var(--mono-dur-press) var(--mono-ease-out);
+  }
+  .mono-chip:hover {
+    background: var(--mono-accent);
+    border-color: var(--mono-accent);
+    color: var(--mono-bg);
+  }
+  .mono-chip:active { transform: scale(0.96); }
+  .mono-chip--muted { border-color: var(--mono-rule-strong); color: #3a3a3a; }
+
+  .mono-roles { list-style: none; margin: 0; padding: 0; }
+  .mono-role {
+    display: grid;
+    grid-template-columns: 8.5rem 1fr;
+    gap: 1.5rem;
+    padding: 0.95rem 0.75rem;
+    border-bottom: 1px solid var(--mono-rule);
+    align-items: baseline;
+    transition: transform var(--mono-dur-press) var(--mono-ease-out);
+  }
+  .mono-roles .mono-role:first-child { border-top: 1px solid var(--mono-rule); }
+  .mono-role:active { transform: scale(0.96); }
+  .mono-role__period { font-family: var(--mono-mono); font-size: 0.7rem; color: var(--mono-muted); }
+  .mono-role__role { font-family: var(--mono-display); font-weight: 700; font-size: 0.98rem; display: block; margin: 0; }
+  .mono-role__org { font-size: 0.84rem; color: var(--mono-muted); }
+
+  /* ═══ act ۴ — دعوت: the only saturated band ═══ */
+  .mono-band {
+    position: relative;
+    max-width: none;
+    margin-block: clamp(2rem, 5vw, 4rem) 0;
+    padding: clamp(2.5rem, 6vw, 4.5rem) clamp(1.25rem, 5vw, 4rem);
+    background: var(--mono-accent);
+    color: var(--mono-bg);
+    overflow: hidden;
+    border-radius: 0;
+  }
+  .mono-band__line {
+    font-family: var(--mono-display);
+    font-weight: 800;
+    font-size: clamp(1.3rem, 2.8vw, 2.1rem);
+    line-height: 1.85;
+    max-width: 32ch;
+    margin: 0 0 2rem;
+  }
+  .mono-band__mail {
+    direction: ltr;
+    display: inline-block;
+    font-family: var(--mono-mono);
+    font-size: clamp(1rem, 2vw, 1.4rem);
+    color: var(--mono-bg);
+    padding-bottom: 4px;
+    border-bottom: 2px solid var(--mono-bg);
+    transition: opacity var(--mono-dur-ui) var(--mono-ease-out), transform var(--mono-dur-press) var(--mono-ease-out);
+  }
+  .mono-band__mail:hover { opacity: 0.8; }
+  .mono-band__mail:active { transform: scale(0.96); }
+  .mono-band__foot {
+    font-family: var(--mono-mono);
+    font-size: 0.7rem;
+    color: rgba(250, 250, 247, 0.8);
+    margin: 2.5rem 0 0;
+  }
+  .mono-band__mark {
+    position: absolute;
+    inset-inline-start: clamp(1rem, 5vw, 4rem);
+    inset-block-end: clamp(1.5rem, 4vw, 3rem);
+    width: 44px;
+    opacity: 0.85;
+    transform: rotate(11deg);
+  }
+
+  .mono-foot {
+    border-top: 1px solid var(--mono-rule);
+    padding: 1.4rem 0 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--mono-mono);
+    font-size: 0.7rem;
+    color: var(--mono-muted);
+    max-width: 76rem;
+    margin-inline: auto;
+  }
+  .mono-foot a { color: var(--mono-ink); padding-bottom: 2px; border-bottom: 1px solid var(--mono-accent); }
+  .mono-foot a:hover { color: var(--mono-accent); }
+
+  /* focus */
+  a:focus-visible, [tabindex]:focus-visible, li:focus-visible {
+    outline: 2px solid var(--mono-accent);
+    outline-offset: 3px;
+  }
+
+  /* ═══ motion: act stagger, 70ms ═══ */
+  .mono-reveal {
+    opacity: 0;
+    transform: translateY(22px) scale(0.98);
+    transition:
+      opacity var(--mono-dur-scene) var(--mono-ease-out),
+      transform var(--mono-dur-scene) var(--mono-ease-out);
+  }
+  .mono-reveal.mono-is-in { opacity: 1; transform: translateY(0) scale(1); }
+  .mono-delay-0 { transition-delay: calc(var(--mono-stagger) * 0); }
+  .mono-delay-1 { transition-delay: calc(var(--mono-stagger) * 1); }
+  .mono-delay-2 { transition-delay: calc(var(--mono-stagger) * 2); }
+  .mono-delay-3 { transition-delay: calc(var(--mono-stagger) * 3); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mono-reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+    .mono-marquee__track { animation: none; } /* static, still readable */
+    .mono-pulse { animation: none; }
+    .mono-row, .mono-chip, .mono-role, .mono-band__mail { transition: none; transform: none !important; }
+    .mono-plate { display: none !important; }
+  }
+
+  /* ═══ responsive — 390 / 768 / 1440 ═══ */
+  @media (max-width: 1020px) {
+    .mono-tile--anchor { grid-column: 1 / -1; grid-row: auto; }
+    .mono-tile--pm { grid-column: span 5; }
+    .mono-tile--orbit { grid-column: span 3; }
+    .mono-tile--design { grid-column: span 4; }
+    .mono-tile--wide { grid-column: 1 / -1; }
+    .mono-effect { grid-template-columns: 1fr; gap: 2rem; }
+    .mono-row { grid-template-columns: 2.5rem 1fr auto; }
+    .mono-row__org { display: none; }
+    .mono-role { grid-template-columns: 7rem 1fr; }
+  }
+  @media (max-width: 760px) {
+    .mono-bento { gap: 10px; }
+    .mono-tile--pm, .mono-tile--orbit, .mono-tile--design { grid-column: 1 / -1; min-height: 9rem; }
+    .mono-tile--orbit { min-height: 12rem; }
+    .mono-plate { display: none !important; }
+    .mono-row { grid-template-columns: 1fr; gap: 0.4rem; padding: 1.2rem 0.25rem; }
+    .mono-row__n { display: none; }
+    .mono-row__inline {
+      display: grid;
+      gap: 0.3rem;
+      margin-top: 0.5rem;
+    }
+    .mono-row__inline-org { font-family: var(--mono-mono); font-size: 0.7rem; color: var(--mono-accent); }
+    .mono-row__inline-sum { font-size: 0.84rem; line-height: 1.95; color: #3a3a3a; }
+    .mono-role { grid-template-columns: 1fr; gap: 0.3rem; }
+    .mono-top__meta { display: none; }
+    .mono-band__mark { width: 32px; }
+  }
+</style>

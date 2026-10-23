@@ -1,0 +1,1546 @@
+---
+import Base from '../../layouts/Base.astro';
+import GridPlate from '../../components/demos/lab/GridPlate.astro';
+import SignalMark from '../../components/demos/lab/SignalMark.astro';
+import WaveField from '../../components/demos/lab/WaveField.astro';
+import CalibrationRule from '../../components/demos/lab/CalibrationRule.astro';
+import TraceGlyph from '../../components/demos/lab/TraceGlyph.astro';
+import { certifications, experience, principles, skills, thesis, work } from '../../data/facts';
+
+const fa = (n: number): string => String(n).replace(/\d/g, (d) => '۰۱۲۳۴۵۶۷۸۹'[Number(d)]);
+const idx = (n: number): string => fa(n).padStart(2, '۰');
+
+/* Act ۰۲ — field stations: current roles only (facts, untouched). */
+const stations = experience.filter((e) => e.current);
+
+/* Act ۰۳ — showable work (thesis lives in its own panel, so it is not repeated here). */
+const workItems = [work[0], work[1], work[2], work[4]];
+const glyphFor = ['signal', 'attention', 'grid', 'attention'] as const;
+
+/* Act ۰۲ — field log: education + roles, chronological. TMS internship from the brief. */
+type LogRow = { period: string; role: string; org: string; kind: string };
+const fieldLog: LogRow[] = [
+  { period: '۱۳۹۶ — ۱۴۰۰', role: 'کارشناسی روان‌شناسی', org: 'دانشکده رفاه', kind: 'تحصیل' },
+  { period: '۱۳۹۷ — ۱۳۹۸', role: 'کارشناس مارکتینگ و مسئول اجرایی کارگاه‌ها', org: 'کلینیک خانواده پویا', kind: 'اجرا' },
+  { period: '۱۳۹۸ — ۱۳۹۹', role: 'تولیدکننده محتوا و مسئول اجرایی کارگاه‌ها', org: 'کلینیک خانه آینه', kind: 'اجرا' },
+  { period: '۱۳۹۹ — ۱۴۰۱', role: 'پشتیبانی فنی کلاس‌های مجازی', org: 'کانون زبان ایران', kind: 'پشتیبانی' },
+  { period: '۱۴۰۰ — ۱۴۰۱', role: 'کارشناس پژوهش', org: 'دانشکده رفاه', kind: 'پژوهش' },
+  { period: '۱۴۰۰ — ۱۴۰۱', role: 'ارزیاب شناختی CANTAB', org: 'مرکز مشاوره و روان‌شناسی شایسته‌پرور', kind: 'سنجش' },
+  { period: '۱۴۰۱ — اکنون', role: 'طراح، پشتیبان و مسئول سایت', org: 'مؤسسه تیبو', kind: 'اجرا' },
+  { period: '۱۴۰۲', role: 'کارآموز تحریک مغناطیسی مغز (TMS)', org: 'کلینیک توانبخشی سکته مغزی تیبسم', kind: 'کارآموزی' },
+  { period: '۱۴۰۲ — اکنون', role: 'کارشناسی ارشد علوم شناختی', org: 'مؤسسه علوم شناختی', kind: 'تحصیل' },
+  { period: '۱۴۰۲ — اکنون', role: 'ارزیاب روان‌شناس و تولیدکننده محتوا', org: 'رومینر', kind: 'ارزیابی' },
+  { period: 'اکنون', role: 'مدیر پروژه', org: 'کلینیک ایماژ', kind: 'مدیریت' },
+  { period: 'اکنون', role: 'همکار ارزیابی سازمانی مبتنی بر نوار مغزی', org: 'انستیتو مغز ایماژ', kind: 'سنجش' },
+];
+---
+
+<Base
+  title="مهدیه گنجی‌منش — آزمایشگاه"
+  description="طرح آزمایشگاه — مهدیه گنجی‌منش؛ روان‌شناسی شناختی، سنجش، مدیریت پروژه."
+  themeColor="#F5F8F8"
+>
+  <script is:inline>document.documentElement.classList.add('lab-js');</script>
+
+  <main class="lab-page">
+    <a class="lab-back" href="/demos">
+      <span class="lab-backdot" aria-hidden="true"></span>
+      <span>شش طرح</span>
+      <span class="lab-backen" dir="ltr">/ 06</span>
+    </a>
+
+    {/* ————— Act ۰۰ · سیگنال ————— */}
+    <header class="lab-sec lab-hero" data-reveal id="lab-act-0">
+      <div class="lab-in">
+        <GridPlate />
+
+        <div class="lab-topline">
+          <span class="lab-topmark"><SignalMark /></span>
+          <span class="lab-topname">مهدیه گنجی‌منش</span>
+          <span class="lab-topen lab-mono" dir="ltr">MAHDIEH GANJIMANESH</span>
+        </div>
+
+        <div class="lab-grid12 lab-actpad">
+          <div class="lab-hero-copy lab-settle">
+            <CalibrationRule label="ACT.00 — SIGNAL" />
+            <p class="lab-kickfa">سیگنال — پیش از هر حرف، یک موج.</p>
+            <h1 class="lab-h1">
+              چطور می‌شود آدم را پیش از قضاوت خواند<span class="lab-mark">؟</span>
+            </h1>
+            <p class="lab-lede">
+              مهدیه گنجی‌منش؛ روان‌شناس شناختی. پاسخ من به این پرسش در اتاق
+              اندازه‌گیری شروع می‌شود: پیش از هر قضاوتی، اول سیگنال را می‌خوانم —
+              نوار مغزی، ارزیابی شناختی، توجه. همین قاعده را برای این صفحه هم
+              گذاشته‌ام: اول روش، بعد میدان، بعد اثر.
+            </p>
+          </div>
+
+          <aside class="lab-readout lab-settle" style="--rd:140ms" aria-label="مشخصات نمودار سیگنال">
+            <p class="lab-read-head">
+              <span dir="ltr">SIGNAL</span>
+              <span class="lab-read-dot" aria-hidden="true"></span>
+            </p>
+            <p class="lab-read-line" dir="ltr">EEG · QEEG · CANTAB</p>
+            <p class="lab-read-line" dir="ltr">CH-01 · CH-02 · CH-03 · CH-04</p>
+            <p class="lab-read-line" dir="ltr">TRACE: ILLUSTRATIVE</p>
+            <p class="lab-read-note">موج‌ها تصویری‌اند؛ نه داده‌ی بیمار.</p>
+          </aside>
+
+          <figure class="lab-wavebox lab-settle" style="--rd:210ms">
+            <WaveField mode="full" />
+            <figcaption class="lab-wavecap">
+              <span class="lab-mono" dir="ltr">TRACE / 4CH</span>
+              <span class="lab-mono" dir="ltr">ILLUSTRATIVE — NOT PATIENT DATA</span>
+            </figcaption>
+          </figure>
+        </div>
+
+        <p class="lab-pull lab-settle" style="--rd:280ms">
+          سیگنال بی‌قاعده چیزی نمی‌گوید؛ خواندنش روش می‌خواهد
+          <span class="lab-pullmark" aria-hidden="true">←</span>
+        </p>
+      </div>
+    </header>
+
+    {/* ————— Act ۰۱ · روش ————— */}
+    <section class="lab-sec" data-reveal id="lab-act-1" aria-labelledby="lab-h-act1">
+      <div class="lab-in">
+        <GridPlate />
+
+        <header class="lab-acthead">
+          <CalibrationRule label="ACT.01 — METHOD" />
+          <div class="lab-acthead-row">
+            <h2 class="lab-h2" id="lab-h-act1">روش</h2>
+            <span class="lab-actnum" aria-hidden="true">۰۱</span>
+          </div>
+          <p class="lab-actsub lab-settle">
+            روش من این است: پیش از قضاوت، اندازه‌گیری — و اول از همه، توجه.
+          </p>
+        </header>
+
+        <div class="lab-grid12 lab-actpad">
+          <div class="lab-method-main lab-settle">
+            <p>
+              کارشناسی روان‌شناسی از دانشکده رفاه دارم و کارشناسی ارشد علوم
+              شناختی با گرایش روان‌شناسی شناختی را در مؤسسه علوم شناختی
+              می‌خوانم. این زمینه به من یک قاعده‌ی کاری داده: پیش از آن‌که
+              درباره‌ی توجه، حافظه یا توان کسی نظر بدهم، اول آن را اندازه
+              می‌گیرم؛ حدس در این کار بی‌جاست.
+            </p>
+            <p>
+              ابزارها برای همین قاعدهاند: نقشه‌برداری مغزی با QEEG، ارزیابی
+              شناختی با CANTAB، نوروفیدبک و لورتا، و تحریک‌های غیرتهاجمی مثل
+              tDCS و TMS. هر کدام یک پنجره به لایه‌ی متفاوتی از یک چیزند —
+              توجه.
+            </p>
+            <p>
+              بعد از اندازه‌گیری هم عدد را تنها نمی‌گذارم؛ تفسیر را کنار خودِ
+              آدم انجام می‌دهم، نه پشت میز. عدد سؤال را دقیق‌تر می‌کند، نه
+              جواب را.
+            </p>
+          </div>
+
+          <aside class="lab-method-aside">
+            <h3 class="lab-mini">سه قاعده</h3>
+            <ol class="lab-rules">
+              {
+                principles.map((p, i) => (
+                  <li class="lab-settle" style={`--rd:${i * 70}ms`}>
+                    <span class="lab-ridx">{idx(i + 1)}</span>
+                    <strong class="lab-rtxt">{p}</strong>
+                  </li>
+                ))
+              }
+            </ol>
+            <p class="lab-mono lab-instruments lab-settle" style="--rd:210ms" dir="ltr">
+              QEEG · NEUROFEEDBACK · tDCS · TMS · CANTAB
+            </p>
+          </aside>
+        </div>
+
+        <p class="lab-pull lab-settle" style="--rd:140ms">
+          روشی که در اتاق اندازه‌گیری جواب داد، باید میان آدم‌ها هم اجرا شود
+          <span class="lab-pullmark" aria-hidden="true">←</span>
+        </p>
+      </div>
+    </section>
+
+    {/* ————— Act ۰۲ · میدان ————— */}
+    <section class="lab-sec" data-reveal id="lab-act-2" aria-labelledby="lab-h-act2">
+      <div class="lab-in">
+        <GridPlate />
+
+        <header class="lab-acthead">
+          <CalibrationRule label="ACT.02 — FIELD" />
+          <div class="lab-acthead-row">
+            <h2 class="lab-h2" id="lab-h-act2">میدان</h2>
+            <span class="lab-actnum" aria-hidden="true">۰۲</span>
+          </div>
+          <p class="lab-actsub lab-settle">
+            جایی که روش میان تیم، سازمان و درمان اجرا می‌شود.
+          </p>
+        </header>
+
+        <div class="lab-actpad">
+          <div class="lab-stations lab-settle">
+            <h3 class="lab-mini">ایستگاه‌های کنونی</h3>
+            <ul class="lab-stationlist">
+              {
+                stations.map((s, i) => (
+                  <li class="lab-settle" style={`--rd:${i * 70}ms`}>
+                    <span class="lab-stdot" aria-hidden="true"></span>
+                    <span class="lab-stperiod">{s.period}</span>
+                    <span class="lab-stmain">
+                      <strong class="lab-strole">{s.role}</strong>
+                      <span class="lab-storg"> — {s.org}</span>
+                    </span>
+                    <span class="lab-stfocus">{s.focus}</span>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+
+          <div class="lab-fieldlog lab-settle" style="--rd:140ms">
+            <h3 class="lab-mini">دفتر میدان — از ۱۳۹۶ تا امروز</h3>
+            <ul class="lab-log">
+              {
+                fieldLog.map((t, i) => (
+                  <li class="lab-settle" style={`--rd:${Math.min(i, 7) * 70}ms`}>
+                    <span class="lab-logperiod">{t.period}</span>
+                    <span class="lab-logmain">
+                      <strong class="lab-logrole">{t.role}</strong>
+                      <span class="lab-logorg"> — {t.org}</span>
+                    </span>
+                    <span class="lab-logkind">{t.kind}</span>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
+
+        <p class="lab-pull lab-settle" style="--rd:140ms">
+          سرجمع از این میدان‌ها چند اثر ماند؛ فهرستشان کوتاه و قابل نشان‌دادن است
+          <span class="lab-pullmark" aria-hidden="true">←</span>
+        </p>
+      </div>
+    </section>
+
+    {/* ————— Act ۰۳ · اثر ————— */}
+    <section class="lab-sec" data-reveal id="lab-act-3" aria-labelledby="lab-h-act3">
+      <div class="lab-in">
+        <GridPlate />
+
+        <header class="lab-acthead">
+          <CalibrationRule label="ACT.03 — EVIDENCE" />
+          <div class="lab-acthead-row">
+            <h2 class="lab-h2" id="lab-h-act3">اثر</h2>
+            <span class="lab-actnum" aria-hidden="true">۰۳</span>
+          </div>
+          <p class="lab-actsub lab-settle">
+            فهرست قابل نشان‌دادن — بدون تزئین.
+          </p>
+        </header>
+
+        <div class="lab-actpad">
+          <ul class="lab-worklist">
+            {
+              workItems.map((w, i) => (
+                <li class="lab-work lab-settle" style={`--rd:${i * 70}ms`}>
+                  <span class="lab-workrule" aria-hidden="true"></span>
+                  <div class="lab-workgrid">
+                    <span class="lab-workglyph glyph-teal">
+                      <TraceGlyph variant={glyphFor[i]} />
+                    </span>
+                    <div class="lab-workmain">
+                      <span class="lab-workhead">
+                        <span class="lab-workidx">{idx(i + 1)}</span>
+                        <h3 class="lab-worktitle">{w.title}</h3>
+                      </span>
+                      <p class="lab-workorg">{w.org}</p>
+                      <p class="lab-worksum">{w.summary}</p>
+                    </div>
+                    <div class="lab-workaside">
+                      <span class="lab-workkind">{w.kind}</span>
+                      <span class="lab-workrole">{w.role}</span>
+                    </div>
+                  </div>
+                </li>
+              ))
+            }
+          </ul>
+
+          <div class="lab-grid12 lab-thesisband">
+            <div class="lab-thesis lab-settle">
+              <p class="lab-mono" dir="ltr">RESEARCH — MA THESIS</p>
+              <p class="lab-thesistitle">
+                «رابطه جهت‌گیری عملکردی و تسلطی با <span class="lab-under">تفکر واگرا و همگرا</span> با نقش تعدیل‌گر گشودگی به تجربه»
+              </p>
+              <p class="lab-thesisq">
+                می‌پرسم: جهت‌گیری به عملکرد و تسلط چه نسبتی با شیوه‌ی فکر کردنت
+                دارد — و گشودگی به تجربه در این رابطه چه می‌کند؟
+              </p>
+              <p class="lab-thesischips">
+                <span class="lab-chip">{thesis.status}</span>
+                <span class="lab-chip">{thesis.field}</span>
+              </p>
+            </div>
+          </div>
+
+          <figure class="lab-strip lab-settle" aria-hidden="true">
+            <WaveField mode="strip" />
+          </figure>
+
+          <div class="lab-calib lab-settle">
+            <h3 class="lab-mini">دفتر کالیبراسیون</h3>
+            <p class="lab-calibsub">
+              {fa(certifications.length)} گواهی و آموزش · {fa(skills.length)} ابزار — فهرست، بدون حاشیه.
+            </p>
+            <div class="lab-grid12 lab-calibgrid">
+              <div class="lab-tablewrap lab-settle">
+                <table class="lab-table">
+                  <caption class="lab-sr">گواهی‌ها و آموزش‌ها</caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">ردیف</th>
+                      <th scope="col">گواهی و آموزش</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {
+                      certifications.map((c, i) => (
+                        <tr>
+                          <td class="lab-tdidx">{idx(i + 1)}</td>
+                          <td>{c}</td>
+                        </tr>
+                      ))
+                    }
+                  </tbody>
+                </table>
+              </div>
+              <div class="lab-tablewrap lab-tablewrap--skills lab-settle" style="--rd:70ms">
+                <table class="lab-table">
+                  <caption class="lab-sr">ابزارها و مهارت‌ها</caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">ردیف</th>
+                      <th scope="col">ابزار و مهارت</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {
+                      skills.map((s, i) => (
+                        <tr>
+                          <td class="lab-tdidx">{idx(i + 1)}</td>
+                          <td>{s}</td>
+                        </tr>
+                      ))
+                    }
+                  </tbody>
+                </table>
+                <p class="lab-skillsnote">
+                  هر ابزار در خدمت همان قاعده است: چیزی که ساخته می‌شود باید کار
+                  کند — از تست شناختی تا سایت کلینیک.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="lab-pull lab-settle" style="--rd:140ms">
+          فهرست بعدی فقط یک ردیف دارد
+          <span class="lab-pullmark" aria-hidden="true">←</span>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  {/* ————— Act ۰۴ · دعوت ————— */}
+  <footer class="lab-page lab-sec lab-contact" data-reveal id="lab-act-4">
+    <div class="lab-in">
+      <GridPlate />
+
+      <figure class="lab-contact-wave" aria-hidden="true">
+        <WaveField mode="resolve" />
+      </figure>
+
+      <header class="lab-acthead">
+        <CalibrationRule label="ACT.04 — INVITATION" />
+        <div class="lab-acthead-row">
+          <h2 class="lab-h2" id="lab-h-act4">دعوت</h2>
+          <span class="lab-actnum" aria-hidden="true">۰۴</span>
+        </div>
+        <p class="lab-actsub lab-settle">
+          برای ارزیابی سازمانی، همکاری پژوهشی یا پروژه‌های وب و طراحی — یک
+          ایمیل کافی است؛ بدون فرم و بدون واسطه.
+        </p>
+      </header>
+
+      <p class="lab-mailrow">
+        <a class="lab-mail lab-settle" href="mailto:ganimanesh_mahdieh@yahoo.com" dir="ltr">
+          ganimanesh_mahdieh@yahoo.com
+        </a>
+      </p>
+
+      <div class="lab-foot lab-mono" dir="ltr">
+        <span>MAHDIEH GANJIMANESH</span>
+        <span>MAHDIEHGANGI.IR</span>
+        <span>TEHRAN — IR</span>
+      </div>
+    </div>
+  </footer>
+</Base>
+
+<style is:global>
+  /* ————— ۰ · tokens ————— */
+  .lab-page {
+    /* palette */
+    --lab-bg: #F5F8F8;
+    --lab-ink: #0C1A1E;
+    --lab-teal: #0F6B68;
+    --lab-mint: #9FD8D0;
+    --lab-coral: #FF5A36;
+    --lab-rule: #D5E3E3;
+    --lab-dim: #48626B;
+    /* fonts */
+    --lab-display: var(--font-display);
+    --lab-body: var(--font-body);
+    --lab-mono: var(--font-mono);
+    /* type scale */
+    --lab-s-12: 0.75rem;
+    --lab-s-16: 1rem;
+    --lab-s-20: 1.25rem;
+    --lab-s-28: 1.75rem;
+    --lab-s-40: 2.5rem;
+    --lab-s-64: 4rem;
+    --lab-s-hero: clamp(3.5rem, 8vw, 7rem);
+    /* instrument geometry */
+    --lab-radius: 2px;
+    --lab-pad: clamp(1.25rem, 4vw, 4rem);
+    --lab-gap: clamp(1rem, 2.2vw, 1.75rem);
+    /* motion grammar */
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+    --ease-linear: linear;
+    --dur-press: 120ms;
+    --dur-ui: 180ms;
+    --dur-enter: 420ms;
+    --dur-scene: 720ms;
+    --stagger: 70ms;
+    --lab-draw: 1.8s;
+
+    background: var(--lab-bg);
+    color: var(--lab-ink);
+    font-family: var(--lab-body);
+    font-size: var(--lab-s-16);
+    line-height: 1.85;
+    min-height: 100dvh;
+    overflow-x: clip;
+  }
+
+  .lab-page ::selection {
+    background: var(--lab-teal);
+    color: #F5F8F8;
+  }
+
+  .lab-page a:focus-visible,
+  .lab-page button:focus-visible {
+    outline: 2px solid var(--lab-ink);
+    outline-offset: 3px;
+    border-radius: var(--lab-radius);
+  }
+
+  .lab-contact a:focus-visible,
+  .lab-contact button:focus-visible {
+    outline-color: var(--lab-mint);
+  }
+
+  .lab-sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* ————— ۱ · stage & plate ————— */
+  .lab-in {
+    position: relative;
+    max-width: 1400px;
+    margin-inline: auto;
+    padding-inline: var(--lab-pad);
+  }
+
+  .lab-in > :not(.lab-gridplate) {
+    position: relative;
+    z-index: 1;
+  }
+
+  .lab-gridplate {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    padding-inline: var(--lab-pad);
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    pointer-events: none;
+  }
+
+  .lab-gridplate i {
+    display: block;
+    border-inline-start: 1px solid var(--lab-rule);
+  }
+
+  .lab-gridplate i:last-child {
+    border-inline-end: 1px solid var(--lab-rule);
+  }
+
+  .lab-sec {
+    border-top: 1px solid var(--lab-rule);
+  }
+
+  .lab-sec--hero,
+  .lab-hero {
+    border-top: 0;
+  }
+
+  .lab-grid12 {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: var(--lab-gap);
+  }
+
+  .lab-actpad {
+    padding-block: 2.4rem 1rem;
+  }
+
+  .lab-mono {
+    font-family: var(--lab-mono);
+    font-size: var(--lab-s-12);
+    letter-spacing: 0.14em;
+    color: var(--lab-dim);
+  }
+
+  /* ————— ۲ · fixed link back ————— */
+  .lab-back {
+    position: fixed;
+    top: 1.1rem;
+    inset-inline-end: 1.1rem;
+    z-index: 60;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.42rem 0.8rem;
+    background: rgba(245, 248, 248, 0.9);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--lab-rule);
+    border-radius: var(--lab-radius);
+    color: var(--lab-ink);
+    font-family: var(--lab-body);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    line-height: 1.6;
+    text-decoration: none;
+    transition:
+      color var(--dur-ui) linear,
+      border-color var(--dur-ui) linear,
+      transform var(--dur-press) var(--ease-out);
+  }
+
+  .lab-back:hover {
+    color: var(--lab-teal);
+    border-color: var(--lab-teal);
+  }
+
+  .lab-back:active {
+    transform: scale(0.96);
+  }
+
+  .lab-backdot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--lab-coral);
+  }
+
+  .lab-backen {
+    font-family: var(--lab-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.08em;
+    color: var(--lab-dim);
+  }
+
+  /* ————— ۳ · act header ————— */
+  .lab-acthead {
+    position: relative;
+    padding-block: 1.7rem 0;
+  }
+
+  .lab-acthead-row {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    gap: 1rem;
+    margin-top: 0.9rem;
+  }
+
+  .lab-h2 {
+    margin: 0;
+    font-family: var(--lab-display);
+    font-size: var(--lab-s-40);
+    font-weight: 800;
+    line-height: 1.15;
+  }
+
+  .lab-actnum {
+    position: absolute;
+    inset-inline-end: 0;
+    top: -1.3rem;
+    font-family: var(--lab-display);
+    font-size: var(--lab-s-64);
+    font-weight: 800;
+    line-height: 1;
+    color: var(--lab-mint);
+    opacity: 0.45;
+    pointer-events: none;
+  }
+
+  .lab-actsub {
+    margin: 1.1rem 0 0;
+    max-width: 40rem;
+    color: var(--lab-dim);
+    font-size: var(--lab-s-20);
+    line-height: 1.8;
+  }
+
+  .lab-pull {
+    margin: 2.4rem 0 0;
+    padding-bottom: 2.8rem;
+    max-width: 46rem;
+    color: var(--lab-teal);
+    font-family: var(--lab-display);
+    font-size: var(--lab-s-20);
+    font-weight: 600;
+    line-height: 1.8;
+  }
+
+  .lab-pullmark {
+    margin-inline-start: 0.5rem;
+    color: var(--lab-dim);
+  }
+
+  /* ————— ۴ · hero (act ۰۰) ————— */
+  .lab-topline {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding-block: 0.9rem 1rem;
+    border-bottom: 1px solid var(--lab-rule);
+  }
+
+  .lab-topmark {
+    display: inline-flex;
+    color: var(--lab-ink);
+  }
+
+  .lab-topname {
+    font-family: var(--lab-display);
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  .lab-topen {
+    margin-inline-start: auto;
+    padding-inline-end: 6.5rem; /* clears the fixed «شش طرح» chip */
+  }
+
+  .lab-hero-copy {
+    grid-column: 1 / span 8;
+  }
+
+  .lab-hero-copy .lab-cal {
+    margin-bottom: 1rem;
+  }
+
+  .lab-kickfa {
+    margin: 0 0 1.1rem;
+    font-size: var(--lab-s-12);
+    color: var(--lab-dim);
+  }
+
+  .lab-h1 {
+    margin: 0 0 1.4rem;
+    font-family: var(--lab-display);
+    font-size: var(--lab-s-hero);
+    font-weight: 800;
+    line-height: 1.12;
+    max-width: 55rem;
+  }
+
+  .lab-mark {
+    text-decoration: underline;
+    text-decoration-color: var(--lab-coral);
+    text-decoration-thickness: 0.05em;
+    text-underline-offset: 0.1em;
+  }
+
+  .lab-lede {
+    margin: 0;
+    max-width: 40rem;
+    font-size: var(--lab-s-20);
+    line-height: 1.9;
+  }
+
+  .lab-readout {
+    grid-column: 10 / span 3;
+    align-self: end;
+    align-content: start;
+    border: 1px solid var(--lab-rule);
+    border-radius: var(--lab-radius);
+    background: #ffffff;
+    padding: 1rem 1.1rem;
+  }
+
+  .lab-read-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 0.65rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--lab-rule);
+    font-family: var(--lab-mono);
+    font-size: var(--lab-s-12);
+    letter-spacing: 0.18em;
+    color: var(--lab-teal);
+  }
+
+  .lab-read-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    background: var(--lab-coral);
+  }
+
+  .lab-read-line {
+    margin: 0 0 0.35rem;
+    font-family: var(--lab-mono);
+    font-size: var(--lab-s-12);
+    color: var(--lab-ink);
+    letter-spacing: 0.04em;
+  }
+
+  .lab-read-note {
+    margin: 0.4rem 0 0;
+    padding-top: 0.55rem;
+    border-top: 1px solid var(--lab-rule);
+    font-size: var(--lab-s-12);
+    line-height: 1.9;
+    color: var(--lab-dim);
+  }
+
+  .lab-wavebox {
+    grid-column: 1 / span 12;
+    margin: clamp(2rem, 4vw, 3.2rem) 0 0;
+    border: 1px solid var(--lab-rule);
+    border-radius: var(--lab-radius);
+    background: var(--lab-bg);
+  }
+
+  .lab-wavecap {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.4rem 1rem;
+    padding: 0.55rem 0.85rem;
+    border-top: 1px solid var(--lab-rule);
+  }
+
+  /* ————— ۵ · waveform drawing ————— */
+  .lab-wavefield {
+    display: block;
+    width: 100%;
+    height: auto;
+    direction: ltr;
+  }
+
+  .lab-wavefield .lab-wgrid {
+    stroke: var(--lab-rule);
+    stroke-width: 1;
+  }
+
+  .lab-wavefield .lab-wbase {
+    stroke: var(--lab-rule);
+    stroke-width: 1;
+    stroke-dasharray: 3 7;
+  }
+
+  .lab-wavefield .lab-wlab {
+    font-family: var(--lab-mono);
+    font-size: 11px;
+    fill: var(--lab-dim);
+  }
+
+  .lab-wavefield .lab-tr {
+    fill: none;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+  }
+
+  .lab-tr--delta { stroke: var(--lab-ink); opacity: 0.14; stroke-width: 1.5; }
+  .lab-tr--alpha { stroke: var(--lab-teal); stroke-width: 2; }
+  .lab-tr--beta  { stroke: var(--lab-mint); stroke-width: 1.5; }
+  .lab-tr--coral { stroke: var(--lab-coral); stroke-width: 1.5; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html.lab-js .lab-sec .lab-tr {
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+    }
+
+    html.lab-js .lab-sec.lab-in .lab-tr {
+      animation: lab-wave-draw var(--lab-draw) var(--ease-linear) forwards;
+      animation-delay: calc(var(--wi, 0) * var(--stagger));
+    }
+  }
+
+  @keyframes lab-wave-draw {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  /* ————— ۶ · calibration rule sweep ————— */
+  .lab-cal {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.75rem;
+    color: var(--lab-ink);
+  }
+
+  .lab-cal-rule {
+    flex: 1 1 auto;
+    min-width: 0;
+    height: 14px;
+    transform-origin: 100% 50%;
+  }
+
+  .lab-cal line {
+    stroke: currentColor;
+    stroke-width: 1;
+  }
+
+  .lab-cal-base { opacity: 0.4; }
+  .lab-cal-tick { opacity: 0.26; }
+  .lab-cal-tick-m { opacity: 0.55; }
+
+  .lab-cal-label {
+    font-family: var(--lab-mono);
+    font-size: var(--lab-s-12);
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    color: var(--lab-dim);
+    white-space: nowrap;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html.lab-js .lab-sec .lab-cal-rule {
+      transform: scaleX(0);
+    }
+
+    html.lab-js .lab-sec.lab-in .lab-cal-rule {
+      transform: scaleX(1);
+      transition: transform var(--dur-scene) var(--ease-in-out);
+    }
+  }
+
+  /* instrument boot: rule sweeps first (720ms), content settles (420ms) */
+
+  /* ————— ۷ · act ۰۱ · روش ————— */
+  .lab-method-main {
+    grid-column: 1 / span 8;
+    max-width: 38rem;
+  }
+
+  .lab-method-main p {
+    margin: 0 0 1.2rem;
+    font-size: var(--lab-s-16);
+    line-height: 1.9;
+  }
+
+  .lab-method-main p:last-child {
+    margin-bottom: 0;
+  }
+
+  .lab-method-aside {
+    grid-column: 9 / span 4;
+    align-content: start;
+  }
+
+  .lab-mini {
+    margin: 0 0 0.9rem;
+    font-family: var(--lab-display);
+    font-size: var(--lab-s-16);
+    font-weight: 600;
+    line-height: 1.6;
+  }
+
+  .lab-rules {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--lab-rule);
+  }
+
+  .lab-rules li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.9rem;
+    padding: 0.85rem 0.2rem;
+    border-bottom: 1px solid var(--lab-rule);
+  }
+
+  .lab-ridx {
+    font-family: var(--lab-mono);
+    font-size: var(--lab-s-12);
+    color: var(--lab-teal);
+  }
+
+  .lab-rtxt {
+    font-family: var(--lab-display);
+    font-size: 1.0625rem;
+    font-weight: 600;
+  }
+
+  .lab-instruments {
+    margin: 1.3rem 0 0;
+  }
+
+  /* ————— ۸ · act ۰۲ · میدان ————— */
+  .lab-stations,
+  .lab-fieldlog,
+  .lab-calib {
+    margin-bottom: 2.4rem;
+  }
+
+  .lab-stationlist,
+  .lab-log {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--lab-rule);
+  }
+
+  .lab-stationlist li,
+  .lab-log li {
+    display: grid;
+    align-items: baseline;
+    column-gap: 1.1rem;
+    padding: 0.8rem 0.9rem;
+    border-bottom: 1px solid var(--lab-rule);
+  }
+
+  .lab-stationlist li {
+    grid-template-columns: 1.4rem 8.5rem 1fr;
+  }
+
+  .lab-log li {
+    grid-template-columns: 9rem 1fr auto;
+  }
+
+  .lab-stdot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--lab-coral);
+    align-self: center;
+    justify-self: start;
+  }
+
+  .lab-stperiod,
+  .lab-logperiod {
+    font-size: var(--lab-s-12);
+    color: var(--lab-dim);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .lab-stmain,
+  .lab-logmain {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.1rem 0.15rem;
+  }
+
+  .lab-strole,
+  .lab-logrole {
+    font-size: var(--lab-s-16);
+    font-weight: 600;
+  }
+
+  .lab-storg,
+  .lab-logorg {
+    font-size: var(--lab-s-12);
+    color: var(--lab-dim);
+  }
+
+  .lab-stfocus {
+    font-size: var(--lab-s-12);
+    color: var(--lab-dim);
+  }
+
+  .lab-logkind {
+    justify-self: end;
+    font-size: var(--lab-s-12);
+    color: var(--lab-teal);
+    border: 1px solid var(--lab-rule);
+    border-radius: var(--lab-radius);
+    padding: 0.12rem 0.55rem;
+    white-space: nowrap;
+  }
+
+  /* ————— ۹ · act ۰۳ · اثر ————— */
+  .lab-worklist {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--lab-rule);
+    margin-bottom: 2.6rem;
+  }
+
+  .lab-work {
+    position: relative;
+    border-bottom: 1px solid var(--lab-rule);
+  }
+
+  .lab-workrule {
+    position: absolute;
+    bottom: -1px;
+    inset-inline-start: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--lab-coral);
+    transform: scaleX(0);
+    transform-origin: 100% 50%;
+    transition: transform var(--dur-enter) var(--ease-out);
+  }
+
+  .lab-workgrid {
+    display: grid;
+    grid-template-columns: 3.5rem 1fr auto;
+    column-gap: 1.2rem;
+    align-items: start;
+    padding: 1.3rem 0.9rem 1.25rem;
+    transition: background var(--dur-ui) linear;
+  }
+
+  .lab-workglyph {
+    color: var(--lab-teal);
+    padding-top: 0.35rem;
+  }
+
+  .lab-workhead {
+    display: flex;
+    align-items: baseline;
+    gap: 0.65rem;
+  }
+
+  .lab-workidx {
+    font-family: var(--lab-mono);
+    font-size: var(--lab-s-12);
+    color: var(--lab-teal);
+    transition:
+      color var(--dur-ui) linear,
+      transform var(--dur-ui) var(--ease-out);
+  }
+
+  .lab-worktitle {
+    margin: 0;
+    font-family: var(--lab-display);
+    font-size: var(--lab-s-20);
+    font-weight: 700;
+    line-height: 1.5;
+  }
+
+  .lab-workorg {
+    margin: 0.3rem 0 0;
+    font-size: var(--lab-s-12);
+    color: var(--lab-dim);
+  }
+
+  .lab-worksum {
+    margin: 0.55rem 0 0;
+    max-width: 44rem;
+    font-size: var(--lab-s-16);
+    line-height: 1.9;
+    color: var(--lab-dim);
+    transition: color var(--dur-ui) linear;
+  }
+
+  .lab-workaside {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding-top: 0.4rem;
+  }
+
+  .lab-workkind {
+    font-size: var(--lab-s-12);
+    color: var(--lab-dim);
+    border: 1px solid var(--lab-rule);
+    border-radius: var(--lab-radius);
+    padding: 0.14rem 0.6rem;
+    white-space: nowrap;
+  }
+
+  .lab-workrole {
+    font-size: var(--lab-s-12);
+    color: var(--lab-dim);
+    white-space: nowrap;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .lab-work:hover .lab-workgrid {
+      background: rgba(159, 216, 208, 0.12);
+    }
+
+    .lab-work:hover .lab-workrule {
+      transform: scaleX(1);
+    }
+
+    .lab-work:hover .lab-workidx {
+      color: var(--lab-ink);
+      transform: translateX(-4px);
+    }
+
+    .lab-work:hover .lab-worksum {
+      color: var(--lab-ink);
+    }
+
+    .lab-stationlist li:hover,
+    .lab-log li:hover {
+      background: rgba(159, 216, 208, 0.1);
+    }
+  }
+
+  /* thesis panel */
+  .lab-thesisband {
+    padding-block: 0.4rem 2.4rem;
+  }
+
+  .lab-thesis {
+    grid-column: 2 / span 10;
+    border-block: 1px solid var(--lab-rule);
+    padding-block: 1.9rem 2rem;
+  }
+
+  .lab-thesis .lab-mono {
+    display: block;
+    margin-bottom: 1.1rem;
+    color: var(--lab-teal);
+  }
+
+  .lab-thesistitle {
+    margin: 0;
+    max-width: 56rem;
+    font-family: var(--lab-display);
+    font-size: var(--lab-s-28);
+    font-weight: 800;
+    line-height: 1.7;
+  }
+
+  .lab-under {
+    text-decoration: underline;
+    text-decoration-color: var(--lab-mint);
+    text-decoration-thickness: 0.14em;
+    text-underline-offset: 0.12em;
+  }
+
+  .lab-thesisq {
+    margin: 1.1rem 0 0;
+    max-width: 42rem;
+    font-size: var(--lab-s-16);
+    line-height: 1.9;
+    color: var(--lab-dim);
+  }
+
+  .lab-thesischips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 1.2rem 0 0;
+  }
+
+  .lab-chip {
+    font-size: var(--lab-s-12);
+    color: var(--lab-teal);
+    border: 1px solid var(--lab-teal);
+    border-radius: var(--lab-radius);
+    padding: 0.18rem 0.7rem;
+  }
+
+  /* strip divider */
+  .lab-strip {
+    margin: 0 0 2.4rem;
+    opacity: 0.9;
+  }
+
+  /* calibration tables */
+  .lab-calibsub {
+    margin: 0 0 1.4rem;
+    font-size: var(--lab-s-12);
+    color: var(--lab-dim);
+  }
+
+  .lab-calibgrid .lab-tablewrap {
+    grid-column: 1 / span 7;
+    border: 1px solid var(--lab-rule);
+    border-radius: var(--lab-radius);
+    overflow: hidden;
+  }
+
+  .lab-calibgrid .lab-tablewrap--skills {
+    grid-column: 8 / span 5;
+  }
+
+  .lab-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .lab-table th {
+    text-align: start;
+    padding: 0.7rem 0.9rem;
+    border-bottom: 1px solid var(--lab-rule);
+    font-size: var(--lab-s-12);
+    font-weight: 600;
+    color: var(--lab-dim);
+  }
+
+  .lab-table td {
+    padding: 0.6rem 0.9rem;
+    border-bottom: 1px solid var(--lab-rule);
+    vertical-align: top;
+    font-size: var(--lab-s-16);
+  }
+
+  .lab-table tbody tr:last-child td {
+    border-bottom: 0;
+  }
+
+  .lab-tdidx {
+    font-family: var(--lab-mono);
+    font-size: var(--lab-s-12);
+    color: var(--lab-teal);
+    width: 3.2rem;
+  }
+
+  .lab-skillsnote {
+    margin: 0;
+    padding: 0.9rem;
+    border-top: 1px solid var(--lab-rule);
+    font-size: var(--lab-s-12);
+    line-height: 1.9;
+    color: var(--lab-dim);
+  }
+
+  /* ————— ۱۰ · act ۰۴ · دعوت (inverted) ————— */
+  .lab-contact {
+    --lab-rule: #24383D;
+    --lab-dim: #9DB6B3;
+
+    background: var(--lab-ink);
+    color: #D7E5E3;
+    border-top: 1px solid #24383D;
+  }
+
+  .lab-contact-wave {
+    margin: 1.6rem 0 2rem;
+  }
+
+  .lab-contact .lab-tr--alpha {
+    stroke: var(--lab-mint);
+  }
+
+  .lab-contact .lab-tr--coral {
+    stroke: var(--lab-coral);
+  }
+
+  .lab-contact .lab-actnum {
+    color: var(--lab-mint);
+    opacity: 0.3;
+  }
+
+  .lab-mailrow {
+    margin: 0;
+    padding-block: 0.4rem 1rem;
+  }
+
+  .lab-mail {
+    display: inline-block;
+    direction: ltr;
+    color: var(--lab-coral);
+    font-family: var(--lab-mono);
+    font-size: clamp(1.75rem, 3.4vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1.4;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-decoration-color: rgba(255, 90, 54, 0.45);
+    text-underline-offset: 0.18em;
+    transition:
+      color var(--dur-ui) linear,
+      text-decoration-color var(--dur-ui) linear,
+      transform var(--dur-press) var(--ease-out);
+  }
+
+  .lab-mail:hover {
+    color: var(--lab-mint);
+    text-decoration-color: var(--lab-mint);
+  }
+
+  .lab-mail:active {
+    transform: scale(0.96);
+  }
+
+  .lab-foot {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 2.2rem;
+    margin-top: 2.6rem;
+    padding-block: 1.3rem;
+    border-top: 1px solid var(--lab-rule);
+  }
+
+  /* ————— ۱۱ · reveal choreography ————— */
+  @media (prefers-reduced-motion: no-preference) {
+    html.lab-js .lab-sec[data-reveal] {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+
+    html.lab-js .lab-sec[data-reveal].lab-in {
+      opacity: 1;
+      transform: translateY(0);
+      transition:
+        opacity var(--dur-scene) var(--ease-in-out),
+        transform var(--dur-scene) var(--ease-in-out);
+    }
+
+    html.lab-js .lab-sec[data-reveal] .lab-settle {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+
+    html.lab-js .lab-sec[data-reveal].lab-in .lab-settle {
+      opacity: 1;
+      transform: translateY(0);
+      transition:
+        opacity var(--dur-enter) var(--ease-out) var(--rd, 0ms),
+        transform var(--dur-enter) var(--ease-out) var(--rd, 0ms);
+    }
+  }
+
+  /* ————— ۱۲ · reduced motion: 200ms fade only ————— */
+  @media (prefers-reduced-motion: reduce) {
+    html.lab-js .lab-sec[data-reveal] {
+      opacity: 0;
+      transform: none;
+      transition: opacity 200ms linear !important;
+    }
+
+    html.lab-js .lab-sec[data-reveal].lab-in {
+      opacity: 1;
+    }
+
+    html.lab-js .lab-sec[data-reveal] .lab-settle {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+
+    .lab-tr {
+      stroke-dasharray: none !important;
+      stroke-dashoffset: 0 !important;
+      animation: none !important;
+    }
+
+    .lab-cal-rule {
+      transform: scaleX(1) !important;
+      transition: none !important;
+    }
+
+    .lab-back:active,
+    .lab-mail:active {
+      transform: none;
+    }
+  }
+
+  /* ————— ۱۳ · responsive ————— */
+  @media (max-width: 1000px) {
+    .lab-hero-copy {
+      grid-column: 1 / span 12;
+    }
+
+    .lab-readout {
+      grid-column: 1 / span 7;
+      margin-top: 1.6rem;
+    }
+
+    .lab-method-main {
+      grid-column: 1 / span 12;
+    }
+
+    .lab-method-aside {
+      grid-column: 1 / span 7;
+      margin-top: 1.4rem;
+    }
+
+    .lab-thesis {
+      grid-column: 1 / span 12;
+    }
+  }
+
+  @media (max-width: 820px) {
+    .lab-readout,
+    .lab-method-aside {
+      grid-column: 1 / span 12;
+    }
+
+    .lab-calibgrid .lab-tablewrap,
+    .lab-calibgrid .lab-tablewrap--skills {
+      grid-column: 1 / span 12;
+    }
+
+    .lab-calibgrid .lab-tablewrap--skills {
+      margin-top: 1.3rem;
+    }
+
+    .lab-actnum {
+      font-size: var(--lab-s-40);
+      top: -0.6rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .lab-gridplate {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .lab-gridplate i:nth-child(n + 5) {
+      display: none;
+    }
+
+    .lab-gridplate i:nth-child(4) {
+      border-inline-end: 1px solid var(--lab-rule);
+    }
+
+    .lab-grid12 {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .lab-hero-copy,
+    .lab-readout,
+    .lab-wavebox,
+    .lab-method-main,
+    .lab-method-aside,
+    .lab-thesis {
+      grid-column: 1 / -1;
+    }
+
+    .lab-readout {
+      max-width: 30rem;
+      margin-top: 1.6rem;
+    }
+
+    .lab-topen {
+      display: none;
+    }
+
+    .lab-h1 {
+      font-size: clamp(2.25rem, 9vw, 3.5rem);
+    }
+
+    .lab-workgrid {
+      grid-template-columns: 2.6rem 1fr;
+      row-gap: 0.4rem;
+      padding-inline: 0.3rem;
+    }
+
+    .lab-workaside {
+      grid-column: 2;
+      flex-direction: row;
+      align-items: center;
+      gap: 0.8rem;
+      padding-top: 0;
+    }
+
+    .lab-stationlist li {
+      grid-template-columns: 1.2rem 1fr;
+    }
+
+    .lab-stfocus {
+      grid-column: 2;
+    }
+
+    .lab-log li {
+      grid-template-columns: 1fr auto;
+      row-gap: 0.25rem;
+    }
+
+    .lab-logperiod {
+      grid-column: 1 / -1;
+    }
+
+    .lab-logmain {
+      grid-column: 1;
+    }
+
+    .lab-logkind {
+      grid-column: 2;
+    }
+
+    .lab-table th,
+    .lab-table td {
+      padding: 0.6rem 0.6rem;
+    }
+  }
+</style>
+
+<script>
+  /* Reveal choreography — IntersectionObserver only. Locked-down
+     environments (reduced motion, no IO) get everything immediately. */
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const targets = Array.from(document.querySelectorAll('[data-reveal]'));
+
+  const showAll = () => {
+    targets.forEach((el) => el.classList.add('lab-in'));
+  };
+
+  if (reduce || !('IntersectionObserver' in window)) {
+    showAll();
+  } else {
+    try {
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('lab-in');
+              io.unobserve(entry.target);
+            }
+          }
+        },
+        { threshold: 0.06, rootMargin: '0px 0px -6% 0px' },
+      );
+      targets.forEach((el) => io.observe(el));
+    } catch {
+      showAll();
+    }
+  }
+</script>

@@ -1,0 +1,58 @@
+---
+// BentoTile — sharp tile shell with a generative fill beneath the content.
+// Variants: 'plain' | 'grid' | 'arcs' | 'specimen'
+interface Props {
+  variant?: 'plain' | 'grid' | 'arcs' | 'specimen';
+  class?: string;
+}
+const { variant = 'plain', class: className = '' } = Astro.props;
+const id = `mono-fill-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+<div class:list={['mono-tile', `mono-tile--${variant}`, className]}>
+  {
+    variant !== 'plain' && (
+      variant === 'grid' ? (
+        <svg class="mono-tile__fill" viewBox="0 0 240 240" preserveAspectRatio="none" aria-hidden="true">
+          <g stroke="rgba(13,13,13,0.07)" stroke-width="1">
+            {[30, 60, 90, 120, 150, 180, 210].map((x) => (
+              <line x1={x} y1="0" x2={x} y2="240" />
+            ))}
+            {[30, 60, 90, 120, 150, 180, 210].map((y) => (
+              <line x1="0" y1={y} x2="240" y2={y} />
+            ))}
+          </g>
+          {/* two axes that carry the accent, once */}
+          <line x1="120" y1="0" x2="120" y2="240" stroke="#2B3BFF" stroke-width="1.5" opacity="0.55" />
+          <line x1="0" y1="120" x2="240" y2="120" stroke="#2B3BFF" stroke-width="1.5" opacity="0.55" />
+        </svg>
+      ) : variant === 'arcs' ? (
+        <svg class="mono-tile__fill" viewBox="0 0 240 240" preserveAspectRatio="none" aria-hidden="true">
+          <g fill="none" stroke="rgba(13,13,13,0.12)" stroke-width="1">
+            <path d="M-40 220 A160 160 0 0 1 280 220" />
+            <path d="M-40 190 A130 130 0 0 1 280 190" />
+            <path d="M-40 160 A100 100 0 0 1 280 160" />
+            <path d="M-40 130 A70 70 0 0 1 280 130" />
+            <path d="M-40 100 A40 40 0 0 1 280 100" />
+          </g>
+          <path d="M-40 175 A115 115 0 0 1 280 175" stroke="#2B3BFF" stroke-width="1.5" opacity="0.6" fill="none" />
+        </svg>
+      ) : (
+        <svg class="mono-tile__fill" viewBox="0 0 240 240" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <clipPath id={id}>
+              <rect width="240" height="240" />
+            </clipPath>
+          </defs>
+          <g clip-path={`url(#${id})`}>
+            <text x="220" y="150" text-anchor="end" font-size="150" font-weight="700" fill="rgba(13,13,13,0.08)" font-family="Vazirmatn, sans-serif">ب</text>
+            <line x1="0" y1="176" x2="240" y2="176" stroke="#2B3BFF" stroke-width="1.5" opacity="0.6" />
+            <line x1="0" y1="70" x2="240" y2="70" stroke="rgba(13,13,13,0.15)" stroke-width="1" />
+            <line x1="0" y1="240" x2="240" y2="240" stroke="rgba(13,13,13,0.15)" stroke-width="1" />
+          </g>
+        </svg>
+      )
+    )
+  }
+  <div class="mono-tile__content"><slot /></div>
+</div>

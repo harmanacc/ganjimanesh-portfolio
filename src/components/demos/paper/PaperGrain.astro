@@ -1,0 +1,29 @@
+---
+// دانهٔ کاغذ — نویزِ feTurbulence با شدتِ مؤثرِ ~۱.۵٪، لایه‌ای ثابت روی کل صفحه.
+// فقط CSS؛ طول ۱۶۰ ثانیه با گام‌های مجزا (steps)، بدون canvas.
+---
+
+<div class="paper-grain" aria-hidden="true"></div>
+
+<style is:global>
+  .paper-grain {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.02; /* آلفای لایه ≈ ۱.۵٪ نویز مؤثر */
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='160' height='160' filter='url(%23g)' opacity='0.75'/></svg>");
+    background-size: 160px 160px;
+    animation: paper-grain-drift 160s steps(10, end) infinite;
+  }
+
+  @keyframes paper-grain-drift {
+    from { background-position: 0 0; }
+    to { background-position: 640px 960px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .paper-grain { animation: none; }
+  }
+</style>

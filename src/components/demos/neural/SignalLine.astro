@@ -1,0 +1,71 @@
+---
+/**
+ * SignalLine — a 1px blue line the width of its container.
+ * A bright segment travels the full width once (on load), then only the
+ * quiet track remains. Frozen (track only) under reduced motion.
+ */
+interface Props {
+  width?: string;
+}
+const { width = '100%' } = Astro.props;
+---
+
+<div class="neu-sig" style={`width:${width}`} aria-hidden="true">
+  <i class="neu-sig-track"></i>
+  <i class="neu-sig-sweep"></i>
+</div>
+
+<style>
+  .neu-sig {
+    position: relative;
+    height: 1px;
+    overflow: hidden;
+  }
+  .neu-sig-track {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to left,
+      transparent,
+      rgba(110, 168, 255, 0.4) 45%,
+      rgba(155, 123, 255, 0.4) 60%,
+      transparent
+    );
+    opacity: 0.5;
+  }
+  .neu-sig-sweep {
+    position: absolute;
+    inset: -1px 0;
+    background: linear-gradient(
+      to left,
+      transparent,
+      var(--neu-blue, #6ea8ff) 40%,
+      var(--neu-violet, #9b7bff) 58%,
+      transparent
+    );
+    background-size: 30% 100%;
+    background-repeat: no-repeat;
+    animation: neu-sig-travel
+      2.4s
+      var(--neu-ease-in-out, cubic-bezier(0.77, 0, 0.175, 1))
+      260ms
+      1
+      forwards;
+  }
+  @keyframes neu-sig-travel {
+    from {
+      background-position: 118% 0;
+      opacity: 0.3;
+    }
+    to {
+      background-position: -24% 0;
+      opacity: 1;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .neu-sig-sweep {
+      animation: none;
+      opacity: 0;
+    }
+  }
+</style>

@@ -1,0 +1,51 @@
+---
+// خط‌دارِ چاپساز — قاعدهٔ سرخط با مربع کوچکِ زنگاری و خطِ نازکِ دوم.
+// الگوی «قاعده و مربع» در سرنسخه، بخش‌ها و پانویس تکرار می‌شود.
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+---
+
+<div class={`paper-rorn ${className ?? ''}`} aria-hidden="true">
+  <span class="paper-rorn-top">
+    <i class="paper-rorn-square"></i>
+    <i class="paper-rorn-line"></i>
+  </span>
+  <i class="paper-rorn-hair"></i>
+</div>
+
+<style is:global>
+  .paper-rorn {
+    display: grid;
+    row-gap: 0.28rem;
+    margin: 0;
+  }
+
+  .paper-rorn-top {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+  }
+
+  .paper-rorn-square {
+    flex: none;
+    width: 0.55rem;
+    height: 0.55rem;
+    background: var(--paper-rust, #B23A22);
+  }
+
+  .paper-rorn-line {
+    flex: 1;
+    height: 2px;
+    background: var(--paper-ink, #1A1712);
+  }
+
+  .paper-rorn-hair {
+    width: 42%;
+    height: 1px;
+    /* زیرِ خطِ اصلی، از سمتِ ابتدا (راست در RTL) هم‌ترازِ مربع */
+    margin-inline-start: calc(0.55rem + 0.55rem);
+    background: var(--paper-rule, rgba(26, 23, 18, 0.18));
+  }
+</style>

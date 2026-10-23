@@ -1,0 +1,197 @@
+---
+import Base from '../../layouts/Base.astro';
+
+const demos = [
+  {
+    href: '/demos/01-lab',
+    n: '۰۱',
+    title: 'آزمایشگاه',
+    desc: 'خوانش بالینی، نمودار نوار مغزی، شبکه دقیق و برچسب‌های مونو.',
+  },
+  {
+    href: '/demos/02-paper',
+    n: '۰۲',
+    title: 'کاغذ و مرکب',
+    desc: 'سرمه‌ای روی کاغذ؛ تایپوگرافی ادبی، خطوط چاپی و فهرست کارها.',
+  },
+  {
+    href: '/demos/03-archive',
+    n: '۰۳',
+    title: 'آرشیو سرد',
+    desc: 'تیره و سینمایی؛ تیترهای بزرگ، دانه و حرکت آهسته.',
+  },
+  {
+    href: '/demos/04-mono',
+    n: '۰۴',
+    title: 'تک‌رنگ + برق',
+    desc: 'سفید و سیاه با یک آبی الکتریک؛ گرید بنتو و جزئیات هاور.',
+  },
+  {
+    href: '/demos/05-neural',
+    n: '۰۵',
+    title: 'نقشه مغز',
+    desc: 'سرمه‌ای عمیق، موج‌های سیال و لایه‌های پارالاکس.',
+  },
+  {
+    href: '/demos/06-swiss',
+    n: '۰۶',
+    title: 'سوئیسی',
+    desc: 'گرید سخت، شماره‌گذاری و سکوت؛ فقط تایپوگرافی.',
+  },
+];
+---
+
+<Base title="شش طرح — مهدیه گنجی‌منش" themeColor="#f4f1ea">
+  <main class="index">
+    <header class="head">
+      <p class="kicker">MAHDIEH GANJIMANESH — DESIGN DIRECTIONS</p>
+      <h1>شش طرح اولیه</h1>
+      <p class="lede">
+        یک بریف، شش زبان بصری. هر طرح مستقل نوشته و ساخته شده تا فقط طراحی
+        مقایسه شود.
+      </p>
+    </header>
+
+    <ol class="list">
+      {
+        demos.map((d) => (
+          <li>
+            <a href={d.href}>
+              <span class="n">{d.n}</span>
+              <span class="body">
+                <span class="title">{d.title}</span>
+                <span class="desc">{d.desc}</span>
+              </span>
+              <span class="arrow" aria-hidden="true">←</span>
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+
+    <footer class="foot">
+      <span>مهدیه گنجی‌منش</span>
+      <span>mahdiehgangi.ir</span>
+    </footer>
+  </main>
+</Base>
+
+<style>
+  .index {
+    min-height: 100dvh;
+    background: #f4f1ea;
+    color: #171512;
+    padding: clamp(2rem, 6vw, 5rem) clamp(1.25rem, 5vw, 4rem);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(2rem, 5vw, 4rem);
+  }
+
+  .head {
+    max-width: 48rem;
+  }
+
+  .kicker {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    color: #7a7468;
+    margin: 0 0 1.5rem;
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    font-weight: 800;
+    line-height: 1.05;
+    margin: 0 0 1rem;
+  }
+
+  .lede {
+    font-size: clamp(0.95rem, 1.6vw, 1.125rem);
+    line-height: 2;
+    color: #575147;
+    max-width: 34rem;
+    margin: 0;
+  }
+
+  .list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid rgba(23, 21, 18, 0.16);
+  }
+
+  .list li {
+    border-bottom: 1px solid rgba(23, 21, 18, 0.16);
+  }
+
+  .list a {
+    display: grid;
+    grid-template-columns: 3rem 1fr auto;
+    align-items: center;
+    gap: clamp(1rem, 3vw, 2rem);
+    padding: 1.35rem 0.25rem;
+    text-decoration: none;
+    transition: background 180ms ease, padding 180ms ease;
+  }
+
+  .list a:hover,
+  .list a:focus-visible {
+    background: #e9e4d8;
+    padding-inline: 1rem;
+  }
+
+  .list a:focus-visible {
+    outline: 2px solid #171512;
+    outline-offset: -2px;
+  }
+
+  .n {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: #8a8377;
+  }
+
+  .body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .title {
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 2.4vw, 1.75rem);
+    font-weight: 700;
+  }
+
+  .desc {
+    font-size: 0.875rem;
+    line-height: 1.8;
+    color: #6b6357;
+  }
+
+  .arrow {
+    font-size: 1.25rem;
+    color: #8a8377;
+  }
+
+  .foot {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: #8a8377;
+    letter-spacing: 0.06em;
+  }
+
+  @media (max-width: 640px) {
+    .list a {
+      grid-template-columns: 2rem 1fr;
+    }
+    .arrow {
+      display: none;
+    }
+  }
+</style>

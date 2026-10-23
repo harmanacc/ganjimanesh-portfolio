@@ -1,0 +1,42 @@
+---
+/**
+ * StampMark — the person's chop: a square with a red frame, an inner
+ * hairline, and her initials «م.گ». Used once, in the colophon.
+ * Pure CSS, generated, decorative (her name stands beside it).
+ */
+interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props;
+---
+
+<span class:list={['sw-stamp', className]} aria-hidden="true">
+  <span class="sw-stamp-glyph">م.گ</span>
+</span>
+
+<style is:global>
+  .sw-stamp {
+    display: inline-grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border: 1.25px solid var(--sw-accent, #e63b2e);
+    position: relative;
+    flex: none;
+  }
+  .sw-stamp::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border: 1px solid var(--sw-rule, rgba(17, 17, 17, 0.16));
+    pointer-events: none;
+  }
+  .sw-stamp-glyph {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--sw-ink, #111111);
+    transform: translateY(0.05em); /* optical centering of the Persian glyphs */
+  }
+</style>

@@ -1,0 +1,66 @@
+---
+/**
+ * ConstellationMark — 7-node logo mark. Node 3 (core) breathes slowly.
+ * `uid` keeps the gradient id unique when the mark is used twice on a page.
+ */
+interface Props {
+  size?: number;
+  uid?: string;
+}
+const { size = 26, uid = 'a' } = Astro.props;
+const gid = `neu-mark-grad-${uid}`;
+---
+
+<svg
+  class="neu-mark"
+  width={size}
+  height={size}
+  viewBox="0 0 28 28"
+  fill="none"
+  aria-hidden="true"
+  focusable="false"
+>
+  <defs>
+    <linearGradient id={gid} x1="4" y1="23" x2="24" y2="5" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6EA8FF"></stop>
+      <stop offset="1" stop-color="#9B7BFF"></stop>
+    </linearGradient>
+  </defs>
+  <path
+    d="M4.5 19 L10 6.5 L16.5 12.5 L23.5 4.5 L23 16.5 L18.5 23.5 L12.5 22 L16.5 12.5"
+    stroke={`url(#${gid})`}
+    stroke-width="1.25"
+    stroke-opacity="0.55"
+    fill="none"></path>
+  <circle cx="4.5" cy="19" r="1.4" fill="#6EA8FF" opacity="0.75"></circle>
+  <circle cx="10" cy="6.5" r="1.4" fill="#6EA8FF" opacity="0.9"></circle>
+  <circle class="neu-mark-core" cx="16.5" cy="12.5" r="2" fill="#6EA8FF"></circle>
+  <circle cx="23.5" cy="4.5" r="1.2" fill="#9B7BFF" opacity="0.8"></circle>
+  <circle cx="23" cy="16.5" r="1.2" fill="#6EA8FF" opacity="0.75"></circle>
+  <circle cx="18.5" cy="23.5" r="1.4" fill="#9B7BFF" opacity="0.9"></circle>
+  <circle cx="12.5" cy="22" r="1.2" fill="#9B7BFF" opacity="0.7"></circle>
+</svg>
+
+<style>
+  .neu-mark {
+    display: block;
+    flex: none;
+  }
+  .neu-mark-core {
+    animation: neu-mark-breathe 4s ease-in-out infinite;
+  }
+  @keyframes neu-mark-breathe {
+    0%,
+    100% {
+      opacity: 0.7;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .neu-mark-core {
+      animation: none;
+    }
+  }
+</style>

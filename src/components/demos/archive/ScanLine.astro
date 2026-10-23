@@ -1,0 +1,24 @@
+---
+/** The through-line motif — a 1px acid scan line drifting down, 8s loop. */
+---
+
+<div class="arch-scanline" aria-hidden="true"></div>
+
+<style>
+  .arch-scanline {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 1px;
+    z-index: 70;
+    pointer-events: none;
+    background: var(--arch-acid, #C6FF3D);
+    opacity: 0.28;
+    animation: arch-scan-drift 8s linear infinite;
+  }
+  @keyframes arch-scan-drift {
+    from { transform: translateY(-2px); }
+    to   { transform: translateY(100dvh); }
+  }
+</style>

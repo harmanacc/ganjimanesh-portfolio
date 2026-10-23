@@ -1,0 +1,35 @@
+---
+/** Film grain — animated 2% noise, stepped, fixed, pointer-events none. */
+interface Props {
+  opacity?: number;
+}
+const { opacity = 0.02 } = Astro.props;
+const grain = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`;
+---
+
+<div
+  class="arch-grain"
+  aria-hidden="true"
+  style={`--arch-grain-o:${opacity}; --arch-grain-img:${grain}`}
+>
+</div>
+
+<style>
+  .arch-grain {
+    position: fixed;
+    inset: -8px;
+    z-index: 80;
+    pointer-events: none;
+    background-image: var(--arch-grain-img);
+    background-repeat: repeat;
+    opacity: var(--arch-grain-o);
+    animation: arch-grain-step 0.7s steps(4) infinite;
+  }
+  @keyframes arch-grain-step {
+    0%   { transform: translate(0, 0); }
+    25%  { transform: translate(-4px, 3px); }
+    50%  { transform: translate(3px, -4px); }
+    75%  { transform: translate(-3px, -2px); }
+    100% { transform: translate(2px, 2px); }
+  }
+</style>

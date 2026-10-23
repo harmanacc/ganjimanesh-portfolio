@@ -1,0 +1,40 @@
+---
+// مونوگرام «مگ» — مهدیه گنجی‌منش؛ فریمِ چاپیِ تک‌مسیر.
+// حروف «مگ» با فونت نسخِ سلف‌هاست‌شده داخل مسیر قاب نشسته‌اند.
+interface Props {
+  /** اندازه در پیکسل؛ پیش‌فرض ۴۰ */
+  size?: number;
+  /** کلاس اضافیِ بیرونی */
+  class?: string;
+}
+const { size = 40, class: className } = Astro.props;
+---
+
+<svg
+  width={size}
+  height={size}
+  viewBox="0 0 64 64"
+  fill="none"
+  aria-hidden="true"
+  class={className}
+>
+  <!-- فریم: یک مسیرِ پیوسته با شکافِ کوتاه در لبهٔ پایین (نشانهٔ زیرِ قلم) -->
+  <path
+    d="M46 61.5 H56 A5.5 5.5 0 0 0 61.5 56 V8 A5.5 5.5 0 0 0 56 2.5 H8 A5.5 5.5 0 0 0 2.5 8 V55 A5.5 5.5 0 0 0 8 61.5 H18"
+    stroke="currentColor"
+    stroke-width="1.75"
+    stroke-linecap="round"
+  ></path>
+  <!-- خطِ حاشیهٔ درونی؛ هم‌وزنِ خطوط چاپی -->
+  <path d="M11 52 H53" stroke="currentColor" stroke-width="1" opacity="0.35"></path>
+  <text
+    x="32"
+    y="33"
+    text-anchor="middle"
+    dominant-baseline="central"
+    fill="currentColor"
+    font-family="var(--font-naskh, serif)"
+    font-size="25"
+    font-weight="700"
+  >مگ</text>
+</svg>

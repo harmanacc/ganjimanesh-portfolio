@@ -1,0 +1,767 @@
+---
+/**
+ * ۰۶ — سوئیسی / «The Record»
+ * An annual report about a person: facts as typography.
+ * Five acts — سیگنال / روش / میدان / اثر / دعوت — numbered ۰۱–۰۶ on the
+ * 12-column grid. One red rule per act. Almost no motion.
+ */
+import Base from '../../layouts/Base.astro';
+import { education, experience, thesis, work, certifications } from '../../data/facts';
+import RedRule from '../../components/demos/swiss/RedRule.astro';
+import NumberColumn from '../../components/demos/swiss/NumberColumn.astro';
+import RecordTable from '../../components/demos/swiss/RecordTable.astro';
+import Colophon from '../../components/demos/swiss/Colophon.astro';
+
+const FA_DIGITS = '۰۱۲۳۴۵۶۷۸۹';
+const fa = (n: number): string =>
+  String(n).padStart(2, '0').replace(/\d/g, (d) => FA_DIGITS[Number(d)]);
+
+/** Periods for selected work — drawn only from verifiable facts. */
+const workPeriod: Record<string, string> = {
+  'org-assessment': 'اکنون',
+  'image-clinic': 'اکنون',
+  'wordpress': '۱۴۰۱ — اکنون',
+  'thesis': '۱۴۰۲ — اکنون',
+  'design': '—',
+};
+---
+
+<Base
+  title="مهدیه گنجی‌منش — طرح سوئیسی"
+  description="مهدیه گنجی‌منش — روان‌شناسی شناختی، مدیریت پروژه، طراحی. طرح ششم: سوئیسی، سند فردی."
+  themeColor="#f4f4f0"
+>
+  <div class="sw-page">
+    <script is:inline>
+      document.documentElement.classList.add('sw-js');
+    </script>
+
+    <a class="sw-skip" href="#sw-main">پرش به محتوا</a>
+
+    <header class="sw-mast">
+      <div class="sw-mast-inner">
+        <span class="sw-mast-name" lang="en" dir="ltr">MAHDIEH GANJIMANESH</span>
+        <span class="sw-mast-end">
+          <span class="sw-mast-idx">سند ۰۶ / ۰۶</span>
+          <a class="sw-link" href="/demos">فهرست طرح‌ها</a>
+        </span>
+      </div>
+    </header>
+
+    <main id="sw-main">
+      <!-- ================== ۰۱ / سیگنال ================== -->
+      <section class="sw-sec sw-sec-signal" aria-label="سیگنال">
+        <RedRule class="sw-hero-red sw-draw" />
+        <div class="sw-wrap">
+          <NumberColumn n="۰۱" label="سیگنال" class="sw-hero-no" />
+          <h1 class="sw-h1">مهدیه گنجی‌منش</h1>
+          <p class="sw-lede">
+            روان‌شناس شناختی و مدیر پروژه؛ کارم از سنجش شروع می‌شود و تا اجرا
+            پیش می‌رود.
+          </p>
+
+          <table class="sw-fact">
+            <caption class="sw-sr">مشخصات کوتاه</caption>
+            <tbody>
+              <tr>
+                <th scope="row">محل</th>
+                <td>تهران، ایران</td>
+              </tr>
+              <tr>
+                <th scope="row">تحصیل</th>
+                <td>کارشناسی ارشد علوم شناختی — در حال تحصیل</td>
+              </tr>
+              <tr>
+                <th scope="row">جایگاه</th>
+                <td>مدیر پروژه — کلینیک ایماژ</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p class="sw-hero-foot" lang="en" dir="ltr">
+            MAHDIEH GANJIMANESH — RECORD 06 — TEHRAN, IRAN
+          </p>
+        </div>
+      </section>
+
+      <!-- ================== ۰۲ / روش ================== -->
+      <section class="sw-sec" id="method" aria-labelledby="h-method">
+        <RedRule overhang class="sw-secrule" />
+        <div class="sw-wrap sw-grid">
+          <header class="sw-head">
+            <NumberColumn n="۰۲" label="روش" />
+            <h2 class="sw-h2" id="h-method">سنجش، پیش از حرف</h2>
+          </header>
+
+          <div class="sw-act-main sw-reveal">
+            <p class="sw-p">
+              پیش از هر حکم، سنجش. کارشناسی روان‌شناسی خوانده‌ام و حالا در
+              کارشناسی ارشد علوم شناختی، گرایش روان‌شناسی شناختی، در حال تحصیل
+              هستم. ابزارهایم به همان اصل برمی‌گردد: از ارزیابی شناختی
+              <span dir="ltr" lang="en">CANTAB</span> تا نقشه‌برداری مغز
+              (<span dir="ltr" lang="en">QEEG</span>)، نوروفیدبک و روش‌های تحریک
+              غیرتهاجمی مغز.
+            </p>
+            <p class="sw-p">
+              نتیجه این روش در حرف زدن من دیده می‌شود: درباره رفتار فقط به
+              اندازه‌ای صحبت می‌کنم که سنجیده باشد. بقیه پرسش باز می‌ماند — و
+              پرسش باز، پروژه می‌سازد.
+            </p>
+          </div>
+
+          <RecordTable
+            caption="تحصیلات آکادمیک — از تازه‌تر به قدیمی‌تر"
+            columns={[
+              { label: 'دوره', width: '7.5rem' },
+              { label: 'مقطع', width: '26%' },
+              { label: 'رشته و گرایش', width: '19%' },
+              { label: 'مؤسسه', width: '20%' },
+              { label: 'وضعیت' },
+            ]}
+            class="sw-reveal"
+            >
+            <tbody>
+              {
+                education.map((ed, i) => (
+                  <tr class="sw-row" style={`--sw-i: ${i}`}>
+                    <td class="sw-td-period" data-th="دوره">
+                      {ed.period}
+                    </td>
+                    <td class="sw-td-role">{ed.degree}</td>
+                    <td data-th="رشته و گرایش">{ed.field || '—'}</td>
+                    <td data-th="مؤسسه">{ed.org}</td>
+                    <td class="sw-td-note" data-th="وضعیت">{ed.note || '—'}</td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </RecordTable>
+
+          <p class="sw-pull sw-reveal">
+            روش، وقتی از آزمایشگاه بیرون می‌آید، در میدان آزموده می‌شود.
+          </p>
+        </div>
+      </section>
+
+      <!-- ================== ۰۳ / میدان ================== -->
+      <section class="sw-sec" id="field" aria-labelledby="h-field">
+        <RedRule overhang class="sw-secrule" />
+        <div class="sw-wrap sw-grid">
+          <header class="sw-head">
+            <NumberColumn n="۰۳" label="میدان" />
+            <h2 class="sw-h2" id="h-field">کلینیک‌ها و سازمان‌ها</h2>
+          </header>
+          <p class="sw-intro sw-reveal">
+            جدول زیر میدان‌های کار من است، به ترتیب زمان از تازه‌تر به
+            قدیمی‌تر؛ نقش‌های جاری با مربع قرمز مشخص‌اند.
+          </p>
+
+          <RecordTable
+            caption="تجربه کاری — از تازه‌تر به قدیمی‌تر"
+            columns={[
+              { label: 'دوره', width: '7.5rem' },
+              { label: 'جایگاه', width: '27%' },
+              { label: 'سازمان', width: '23%' },
+              { label: 'حیطه کار' },
+            ]}
+            class="sw-reveal"
+            >
+            <tbody>
+              {
+                experience.map((e, i) => (
+                  <tr class="sw-row" style={`--sw-i: ${i}`}>
+                    <td class="sw-td-period" data-th="دوره">
+                      {e.current && <span class="sw-now-dot" aria-hidden="true" />}
+                      {e.period}
+                    </td>
+                    <td class="sw-td-role">{e.role}</td>
+                    <td data-th="سازمان">{e.org}</td>
+                    <td class="sw-td-note" data-th="حیطه کار">{e.focus}</td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </RecordTable>
+
+          <p class="sw-pull sw-reveal">
+            از این میدان‌ها، چند کار مشخص بیرون آمده است.
+          </p>
+        </div>
+      </section>
+
+      <!-- ================== ۰۴ / اثر ================== -->
+      <section class="sw-sec" id="effect" aria-labelledby="h-effect">
+        <RedRule overhang class="sw-secrule" />
+        <div class="sw-wrap sw-grid">
+          <header class="sw-head">
+            <NumberColumn n="۰۴" label="اثر" />
+            <h2 class="sw-h2" id="h-effect">کارها و سند پژوهش</h2>
+          </header>
+          <p class="sw-intro sw-reveal">
+            پنج کار؛ ترتیب فهرست، ترتیب اهمیت است، نه زمان.
+          </p>
+
+          <ol class="sw-work">
+            {
+              work.map((w, i) => (
+                <li class="sw-work-item sw-reveal" style={`--sw-i: ${i}`}>
+                  <span class="sw-work-no" aria-hidden="true">{fa(i + 1)}</span>
+                  <div class="sw-work-main">
+                    <h3 class="sw-work-title">{w.title}</h3>
+                    <p class="sw-work-meta">
+                      {w.org} · {w.role}
+                    </p>
+                  </div>
+                  <span class="sw-work-period sw-mono">{workPeriod[w.slug]}</span>
+                </li>
+              ))
+            }
+          </ol>
+
+          <div class="sw-thesis sw-reveal">
+            <p class="sw-thesis-label sw-mono">
+              سند پژوهشی — {thesis.field} — در حال انجام
+            </p>
+            <p class="sw-thesis-title">«{thesis.title}»</p>
+            <p class="sw-thesis-q">
+              پرسش: جهت‌گیری عملکردی و تسلطی چه رابطه‌ای با تفکر واگرا و همگرا
+              دارد، و گشودگی به تجربه چه نقشی در این رابطه دارد.
+            </p>
+          </div>
+
+          <p class="sw-pull sw-reveal">
+            آنچه در کار و پژوهش بالا دیده نمی‌شود، در ضمیمه ضبط شده است.
+          </p>
+        </div>
+      </section>
+
+      <!-- ================== ۰۵ / ضمیمه ================== -->
+      <section class="sw-sec" id="appendix" aria-labelledby="h-appendix">
+        <RedRule overhang class="sw-secrule" />
+        <div class="sw-wrap sw-grid">
+          <header class="sw-head">
+            <NumberColumn n="۰۵" label="ضمیمه" />
+            <h2 class="sw-h2" id="h-appendix">آموزش‌ها و گواهی‌ها</h2>
+          </header>
+          <p class="sw-intro sw-reveal">
+            فهرست کامل آموزش‌ها و گواهی‌ها؛ گزیده‌ای نیست.
+          </p>
+
+          <ol class="sw-certs" aria-label="آموزش‌ها و گواهی‌ها">
+            {
+              certifications.map((c, i) => (
+                <li class="sw-reveal" style={`--sw-i: ${i}`}>
+                  <span class="sw-cno" aria-hidden="true">{fa(i + 1)}</span>
+                  <span>{c}</span>
+                </li>
+              ))
+            }
+          </ol>
+
+          <p class="sw-pull sw-reveal">
+            سند کامل شد؛ برای ادامه، یک راه مانده است.
+          </p>
+        </div>
+      </section>
+
+      <!-- ================== ۰۶ / دعوت ================== -->
+      <section class="sw-sec" id="invitation" aria-labelledby="h-invitation">
+        <RedRule overhang class="sw-secrule" />
+        <div class="sw-wrap sw-grid">
+          <header class="sw-head">
+            <NumberColumn n="۰۶" label="دعوت" />
+            <h2 class="sw-h2" id="h-invitation">راه ارتباطی</h2>
+          </header>
+          <div class="sw-act-main sw-reveal">
+            <p class="sw-p">
+              اگر پرسشی درباره روش من دارید، فرصتی سازمانی در نظر دارید، یا
+              پروژه‌ای برای ساخت و طراحی در کار است، راه ارتباطی یکی است: ایمیل.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <Colophon email="ganimanesh_mahdieh@yahoo.com" domain="mahdiehgangi.ir" />
+  </div>
+</Base>
+
+<style is:global>
+  /* ————————————————— tokens (spec ۰۶: «The Record») ————————————————— */
+  :root {
+    --sw-bg: #f4f4f0;
+    --sw-ink: #111111;
+    --sw-muted: #8a8a84; /* reserved for ≥24px text; see --sw-label */
+    --sw-label: #6b6b64; /* --sw-muted darkened to ≥4.5:1 for small text */
+    --sw-accent: #e63b2e;
+    --sw-rule: rgba(17, 17, 17, 0.16);
+
+    --sw-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --sw-ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+    --sw-dur-press: 120ms;
+    --sw-dur-ui: 180ms;
+    --sw-dur-enter: 420ms;
+    --sw-dur-scene: 720ms;
+    --sw-dur-row: 240ms;
+    --sw-stagger: 70ms;
+  }
+
+  .sw-page {
+    min-height: 100dvh;
+    background: var(--sw-bg);
+    color: var(--sw-ink);
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    line-height: 1.95;
+  }
+
+  .sw-page ::selection {
+    background: var(--sw-accent);
+    color: #ffffff;
+  }
+
+  .sw-mono {
+    font-family: var(--font-mono), var(--font-body);
+  }
+
+  .sw-wrap {
+    max-width: 1360px;
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 5vw, 4rem);
+  }
+
+  .sw-sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .sw-page a:focus-visible {
+    outline: 2px solid var(--sw-accent);
+    outline-offset: 3px;
+  }
+
+  .sw-skip {
+    position: absolute;
+    inset-inline-start: 1.25rem;
+    top: -3.5rem;
+    z-index: 10;
+    background: var(--sw-ink);
+    color: var(--sw-bg);
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    text-decoration: none;
+    transition: top var(--sw-dur-ui) var(--sw-ease-out);
+  }
+  .sw-skip:focus-visible {
+    top: 1rem;
+  }
+
+  /* ————————————————— links: static cue + red sweep ————————————————— */
+  .sw-link {
+    position: relative;
+    display: inline-block;
+    color: inherit;
+    text-decoration: none;
+    padding-bottom: 0.3rem;
+    line-height: 1.5;
+  }
+  /* static cue: hairline underline, always present */
+  .sw-link::before {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    height: 1px;
+    background: var(--sw-rule);
+  }
+  /* animated state: red line, scale-only transform */
+  .sw-link::after {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    height: 1px;
+    background: var(--sw-accent);
+    transform: scaleX(0);
+    transform-origin: right center; /* RTL start edge */
+    transition: transform var(--sw-dur-ui) var(--sw-ease-out);
+  }
+  .sw-link:focus-visible::after {
+    transform: scaleX(1);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .sw-link:hover::after {
+      transform: scaleX(1);
+    }
+  }
+
+  /* ————————————————— masthead ————————————————— */
+  .sw-mast {
+    border-bottom: 1px solid var(--sw-rule);
+  }
+  .sw-mast-inner {
+    max-width: 1360px;
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 5vw, 4rem);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.5rem 2rem;
+    padding-block: 1.15rem;
+    font-family: var(--font-mono), var(--font-body);
+    font-size: 0.6875rem;
+    color: var(--sw-label);
+  }
+  .sw-mast-name {
+    letter-spacing: 0.12em;
+  }
+  .sw-mast-end {
+    display: flex;
+    gap: 1.75rem;
+    align-items: baseline;
+    font-size: 0.75rem;
+  }
+
+  /* ————————————————— sections on the 12-column grid ————————————————— */
+  .sw-sec {
+    position: relative;
+    border-top: 1px solid var(--sw-rule);
+    padding-block: clamp(3rem, 7vw, 5.25rem);
+  }
+  /* exactly one red rule per act (RedRule component) */
+  .sw-secrule {
+    position: absolute;
+    top: -1px;
+    inset-inline-start: 0;
+    width: clamp(3.5rem, 9vw, 7rem);
+  }
+
+  .sw-grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: clamp(1rem, 2vw, 1.75rem);
+    row-gap: clamp(1.75rem, 4vw, 2.75rem);
+  }
+
+  .sw-head {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: baseline;
+    gap: clamp(1.25rem, 3vw, 2.5rem);
+  }
+  .sw-h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 800;
+    line-height: 1.25;
+  }
+
+  .sw-intro,
+  .sw-pull {
+    grid-column: 1 / -1;
+    margin: 0;
+    max-width: 56ch;
+    font-size: 0.9375rem;
+    line-height: 1.95;
+    color: var(--sw-label);
+  }
+  .sw-pull {
+    max-width: 44ch;
+    color: var(--sw-ink);
+    font-weight: 500;
+  }
+
+  .sw-act-main {
+    grid-column: 1 / -1;
+  }
+
+  .sw-p {
+    margin: 0 0 1.25rem;
+    max-width: 62ch;
+  }
+  .sw-p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* ————————————————— ۰۱ سیگنال: hero ————————————————— */
+  .sw-sec-signal {
+    padding-block: clamp(3rem, 8vh, 5.5rem) clamp(3.75rem, 11vh, 7rem);
+  }
+  .sw-hero-red.sw-draw {
+    position: absolute;
+    top: -1px;
+    inset-inline-start: 0;
+    width: clamp(3.5rem, 9vw, 7rem);
+    transform: scaleX(0);
+    transform-origin: right center; /* draws once, from the RTL start edge */
+    animation: sw-line var(--sw-dur-scene) var(--sw-ease-out) 250ms forwards;
+  }
+  @keyframes sw-line {
+    to {
+      transform: scaleX(1);
+    }
+  }
+  .sw-hero-no {
+    margin-bottom: clamp(2.25rem, 6vw, 4rem);
+  }
+  .sw-h1 {
+    margin: 0;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: 0; /* no tracking on Persian */
+  }
+  .sw-lede {
+    margin: clamp(1.25rem, 3vw, 2rem) 0 0;
+    max-width: 34rem;
+    font-size: 1.0625rem;
+  }
+
+  .sw-fact {
+    border-collapse: collapse;
+    margin: clamp(2.5rem, 6vw, 4rem) 0 0;
+    min-width: min(100%, 32rem);
+  }
+  .sw-fact th {
+    font-family: var(--font-mono), var(--font-body);
+    font-weight: 400;
+    font-size: 0.75rem;
+    color: var(--sw-label);
+    text-align: start;
+    padding: 0.8rem 0;
+    width: 6rem;
+    vertical-align: top;
+    border-bottom: 1px solid var(--sw-rule);
+  }
+  .sw-fact td {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--sw-rule);
+  }
+  .sw-fact tr:last-child th,
+  .sw-fact tr:last-child td {
+    border-bottom: 0;
+  }
+  .sw-hero-foot {
+    margin: clamp(2.25rem, 6vw, 3.5rem) 0 0;
+    font-family: var(--font-mono), var(--font-body);
+    font-size: 0.6875rem;
+    letter-spacing: 0.1em;
+    color: var(--sw-label);
+  }
+
+  /* ————————————————— record cell voices ————————————————— */
+  .sw-td-period {
+    font-family: var(--font-mono), var(--font-body);
+    font-size: 0.875rem;
+    white-space: nowrap;
+  }
+  .sw-now-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    background: var(--sw-accent);
+    margin-inline-end: 0.5rem;
+    vertical-align: middle;
+  }
+  .sw-td-role {
+    font-weight: 700;
+    line-height: 1.7;
+  }
+  .sw-td-note {
+    color: var(--sw-label);
+    font-size: 0.875rem;
+    line-height: 1.7;
+  }
+
+  /* ————————————————— ۰۴ اثر: numbered work + thesis ————————————————— */
+  .sw-work {
+    grid-column: 1 / -1;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--sw-rule);
+  }
+  .sw-work-item {
+    display: grid;
+    grid-template-columns: 3.5rem minmax(0, 1fr) auto;
+    column-gap: clamp(1rem, 3vw, 2.5rem);
+    align-items: baseline;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--sw-rule);
+  }
+  .sw-work-no {
+    font-family: var(--font-mono), var(--font-body);
+    font-size: 1.5rem;
+    line-height: 1;
+    color: var(--sw-muted); /* ≥24px: large text, passes 3:1 */
+    font-variant-numeric: tabular-nums;
+  }
+  .sw-work-title {
+    margin: 0;
+    font-size: 1.0625rem;
+    font-weight: 700;
+    line-height: 1.7;
+  }
+  .sw-work-meta {
+    margin: 0.25rem 0 0;
+    font-size: 0.875rem;
+    color: var(--sw-label);
+  }
+  .sw-work-period {
+    font-size: 0.875rem;
+    white-space: nowrap;
+  }
+
+  .sw-thesis {
+    grid-column: 1 / -1;
+  }
+  .sw-thesis-label {
+    margin: 0 0 1rem;
+    font-size: 0.75rem;
+    color: var(--sw-label);
+  }
+  .sw-thesis-title {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 800;
+    line-height: 1.9;
+    max-width: 52ch;
+  }
+  .sw-thesis-q {
+    margin: 1rem 0 0;
+    max-width: 56ch;
+    font-size: 0.9375rem;
+    color: var(--sw-label);
+  }
+
+  /* ————————————————— ۰۵ ضمیمه: training record ————————————————— */
+  .sw-certs {
+    grid-column: 1 / -1;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    columns: 2;
+    column-gap: clamp(2rem, 4vw, 4rem);
+    border-top: 1px solid var(--sw-rule);
+  }
+  .sw-certs li {
+    break-inside: avoid;
+    display: flex;
+    align-items: baseline;
+    gap: 0.85rem;
+    padding: 0.55rem 0;
+    border-bottom: 1px solid var(--sw-rule);
+    font-size: 0.9375rem;
+  }
+  .sw-cno {
+    font-family: var(--font-mono), var(--font-body);
+    font-size: 0.75rem;
+    color: var(--sw-label);
+    flex: none;
+  }
+
+  /* ————————————————— motion grammar ————————————————— */
+  /* block reveal: 8px / 420ms; row reveal: 8px / 240ms; stagger 70ms.
+     delay is capped at 5 steps so late-scrolled entries never wait long */
+  .sw-js .sw-reveal {
+    opacity: 0;
+    transform: translateY(8px);
+    transition:
+      opacity var(--sw-dur-enter) var(--sw-ease-out),
+      transform var(--sw-dur-enter) var(--sw-ease-out);
+    transition-delay: calc(min(var(--sw-i, 0), 5) * var(--sw-stagger));
+  }
+  .sw-js .sw-reveal.sw-in {
+    opacity: 1;
+    transform: none;
+  }
+  .sw-js .sw-row {
+    opacity: 0;
+    transform: translateY(8px);
+    transition:
+      opacity var(--sw-dur-row) var(--sw-ease-out),
+      transform var(--sw-dur-row) var(--sw-ease-out);
+    transition-delay: calc(min(var(--sw-i, 0), 5) * var(--sw-stagger));
+  }
+  .sw-js .sw-row.sw-in {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* reduced motion: fade only */
+  @media (prefers-reduced-motion: reduce) {
+    .sw-js .sw-reveal,
+    .sw-js .sw-row {
+      transform: none !important;
+      transition: opacity 200ms ease !important;
+    }
+    .sw-hero-red.sw-draw {
+      animation: none !important;
+      transform: scaleX(1) !important;
+    }
+    .sw-link::after {
+      transition: none;
+    }
+  }
+
+  /* ————————————————— ≥768px column placements ————————————————— */
+  @media (min-width: 768px) {
+    .sw-act-main {
+      grid-column: 1 / 8;
+    }
+    .sw-thesis {
+      grid-column: 1 / 9;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .sw-certs {
+      columns: 1;
+    }
+    .sw-work-item {
+      grid-template-columns: 2.25rem minmax(0, 1fr);
+    }
+    .sw-work-no {
+      font-size: 1.0625rem; /* below 24px again → readable muted label */
+      color: var(--sw-label);
+    }
+    .sw-work-period {
+      grid-column: 2;
+    }
+    .sw-mast-name {
+      letter-spacing: 0;
+    }
+  }
+</style>
+
+<script>
+  const items = document.querySelectorAll('.sw-reveal, .sw-row');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (reduce || !('IntersectionObserver' in window)) {
+    items.forEach((el) => el.classList.add('sw-in'));
+  } else {
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('sw-in');
+            io.unobserve(entry.target);
+          }
+        }
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
+    );
+    items.forEach((el) => io.observe(el));
+  }
+</script>

@@ -1,0 +1,85 @@
+---
+/**
+ * Project plate — one abstract SVG per project.
+ * Variants: orbit | grid | waveform | type
+ * One stroke family: 1.5px main (currentColor = acid), coral trace, bone hairline.
+ */
+interface Props {
+  variant: 'orbit' | 'grid' | 'waveform' | 'type';
+  label?: string;
+}
+const { variant, label = '' } = Astro.props;
+---
+
+<div class="arch-plate" role="img" aria-label={label}>
+  {
+    variant === 'orbit' && (
+      <svg viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="200" cy="120" r="90" stroke="currentColor" stroke-width="1.5" opacity=".35" />
+        <circle cx="200" cy="120" r="56" stroke="var(--arch-acid)" stroke-width="1.5" />
+        <circle cx="200" cy="120" r="22" stroke="var(--arch-coral)" stroke-width="1.5" />
+        <circle cx="256" cy="120" r="5" fill="var(--arch-acid)" />
+        <circle cx="200" cy="64" r="4" fill="var(--arch-coral)" />
+        <line x1="84" y1="120" x2="316" y2="120" stroke="#ECE9E2" stroke-width="1.5" opacity=".25" />
+        <line x1="200" y1="12" x2="200" y2="228" stroke="#ECE9E2" stroke-width="1.5" opacity=".25" />
+      </svg>
+    )
+  }
+  {
+    variant === 'grid' && (
+      <svg viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M56 44 H344 M56 96 H344 M56 144 H344 M56 196 H344" stroke="#ECE9E2" stroke-width="1.5" opacity=".2" />
+        <rect x="60" y="48" width="128" height="44" stroke="var(--arch-acid)" stroke-width="1.5" />
+        <rect x="204" y="100" width="140" height="40" stroke="var(--arch-acid)" stroke-width="1.5" />
+        <rect x="100" y="150" width="180" height="42" stroke="var(--arch-coral)" stroke-width="1.5" />
+        <path d="M188 48 v44 M204 100 v40 M280 150 v42" stroke="#ECE9E2" stroke-width="1.5" opacity=".25" />
+      </svg>
+    )
+  }
+  {
+    variant === 'waveform' && (
+      <svg viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 120 H56 L76 44 L96 196 L116 88 L136 120 H400" stroke="var(--arch-acid)" stroke-width="1.5" />
+        <path d="M0 152 H40 L52 116 L64 192 L76 100 L88 152 H400" stroke="var(--arch-coral)" stroke-width="1.5" opacity=".85" />
+        <path d="M0 76 H96 L108 52 L120 96 L132 76 H400" stroke="#ECE9E2" stroke-width="1.5" opacity=".3" />
+        <line x1="200" y1="16" x2="200" y2="224" stroke="#ECE9E2" stroke-width="1.5" opacity=".18" stroke-dasharray="2 6" />
+      </svg>
+    )
+  }
+  {
+    variant === 'type' && (
+      <svg viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="64" y="40" width="272" height="160" stroke="#ECE9E2" stroke-width="1.5" opacity=".3" />
+        <text
+          x="316"
+          y="152"
+          text-anchor="end"
+          font-family="var(--font-display)"
+          font-weight="800"
+          font-size="88"
+          fill="var(--arch-acid)">واگرا</text
+        >
+        <text
+          x="316"
+          y="106"
+          text-anchor="end"
+          font-family="var(--font-mono)"
+          font-size="14"
+          letter-spacing="4"
+          fill="#ECE9E2"
+          opacity=".55">A → B</text
+        >
+        <line x1="64" y1="172" x2="336" y2="172" stroke="var(--arch-coral)" stroke-width="1.5" />
+      </svg>
+    )
+  }
+</div>
+
+<style>
+  .arch-plate { color: var(--arch-acid, #C6FF3D); }
+  .arch-plate svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+</style>

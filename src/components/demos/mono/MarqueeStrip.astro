@@ -1,0 +1,15 @@
+---
+// MarqueeStrip — thin, ruled strip carrying the Persian triad.
+// Duplicated track inside a clipped window; linear; aria-hidden (decorative).
+interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props;
+const chunk = 'روان‌شناسی شناختی — مدیریت پروژه — طراحی — ';
+---
+
+<div class:list={['mono-marquee', className]} aria-hidden="true">
+  <div class="mono-marquee__track">
+    {Array.from({ length: 6 }).map(() => <span class="mono-marquee__chunk">{chunk}</span>)}
+  </div>
+</div>

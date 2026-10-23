@@ -1,0 +1,57 @@
+---
+// ارجاعِ پانوشت — شمارهٔ بالانویسِ زنگاری با خطِ نازکِ اتصال به متن.
+interface Props {
+  num: string;
+  href: string;
+  id?: string;
+  class?: string;
+}
+const { num, href, id, class: className } = Astro.props;
+---
+
+<sup class={`paper-fnref ${className ?? ''}`} id={id}>
+  <a href={href} aria-label={`پانوشت ${num}`}>
+    <i class="paper-fn-line" aria-hidden="true"></i>{num}
+  </a>
+</sup>
+
+<style is:global>
+  .paper-fnref {
+    position: relative;
+    margin-inline-start: 0.05rem;
+  }
+
+  .paper-fnref a {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+    font-family: var(--font-serif, Georgia, serif);
+    font-size: 0.66em;
+    line-height: 1;
+    color: var(--paper-rust, #B23A22);
+    padding: 0 0.2em;
+  }
+
+  /* خطِ نازکِ اتصال: از متن تا شماره، به اندازه‌ی یک نیم‌فاصله */
+  .paper-fnref .paper-fn-line {
+    position: absolute;
+    inset-inline-start: -0.5em;
+    bottom: 0.28em;
+    width: 0.42em;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.35;
+  }
+
+  .paper-fnref a:hover,
+  .paper-fnref a:focus-visible {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+  }
+
+  .paper-fnref a:focus-visible {
+    outline: 2px solid var(--paper-rust, #B23A22);
+    outline-offset: 2px;
+  }
+</style>

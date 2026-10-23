@@ -1,0 +1,58 @@
+@import "tailwindcss";
+@import "./fonts.css";
+
+@theme {
+  --font-body: "Vazirmatn Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Estedad Variable", "Vazirmatn Variable", ui-sans-serif, sans-serif;
+  --font-naskh: "Noto Naskh Arabic Variable", "Vazirmatn Variable", serif;
+  --font-serif: "Instrument Serif", Georgia, serif;
+  --font-grotesk: "Space Grotesk Variable", ui-sans-serif, sans-serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
+  --font-loud: "Lalezar", "Estedad Variable", sans-serif;
+
+  --color-ink: #1a1712;
+  --color-paper: #f3ede2;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+svg,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

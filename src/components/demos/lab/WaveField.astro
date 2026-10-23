@@ -1,0 +1,141 @@
+---
+/**
+ * WaveField — the through-line motif of «آزمایشگاه».
+ * Build-time generated EEG-like traces (seeded, deterministic), drawn once
+ * via stroke-dashoffset + pathLength. Draw choreography (1.8s linear,
+ * 70ms stagger) lives in the page's global style block.
+ *
+ * Modes transform the motif across the page:
+ *   full    — hero: 4 channels, layered amplitudes, one coral trace
+ *   strip   — act ۰۳ (اثر): one compressed channel
+ *   resolve — act ۰۴ (دعوت): two channels flattening to a single line
+ */
+
+function mulberry32(seed: number): () => number {
+  let a = seed >>> 0;
+  return () => {
+    a = (a + 0x6d2b79f5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+interface TraceOpts {
+  seed: number;
+  base: number;
+  amp: number;
+  step?: number;
+  spikes?: number[];
+  flatten?: number;
+}
+
+function trace({ seed, base, amp, step = 8, spikes = [], flatten = 0 }: TraceOpts): string {
+  const rnd = mulberry32(seed);
+  const width = 1200;
+  const pts: string[] = [];
+  const flatFrom = width * (1 - flatten);
+  const flatSpan = Math.max(1, width - flatFrom);
+  const spikeXs = new Set(spikes.map((f) => Math.round((f * width) / step) * step));
+  let prev = base;
+  for (let x = 0; x <= width; x += step) {
+    const decay = x < flatFrom ? 1 : Math.max(0, 1 - (x - flatFrom) / (flatSpan * 0.6));
+    let y = base + (rnd() - 0.5) * 2 * amp * decay;
+    y = prev + (y - prev) * 0.72;
+    prev = y;
+    pts.push(`${x} ${y.toFixed(1)}`);
+    if (decay > 0.35 && spikeXs.has(x)) {
+      const s = (rnd() - 0.3) * amp * 4 * decay;
+      pts.push(`${x + step / 2} ${(y - s).toFixed(1)}`, `${x + step} ${(y + s * 0.25).toFixed(1)}`);
+      prev = y + s * 0.25;
+    }
+  }
+  return `M ${pts.join(' L ')}`;
+}
+
+interface Props {
+  mode?: 'full' | 'strip' | 'resolve';
+}
+
+const { mode = 'full' } = Astro.props;
+
+const W = 1200;
+
+const geo =
+  mode === 'full'
+    ? { h: 260, bases: [62, 122, 178, 226], labels: true, titled: true }
+    : mode === 'strip'
+      ? { h: 96, bases: [52], labels: false, titled: false }
+      : { h: 200, bases: [92, 148], labels: false, titled: false };
+
+const traces =
+  mode === 'full'
+    ? [
+        { d: trace({ seed: 7, base: 62, amp: 30, step: 12 }), cls: 'lab-tr--delta', wi: 0 },
+        { d: trace({ seed: 21, base: 122, amp: 16, step: 8 }), cls: 'lab-tr--alpha', wi: 1 },
+        { d: trace({ seed: 5, base: 178, amp: 9, step: 6 }), cls: 'lab-tr--beta', wi: 2 },
+        {
+          d: trace({ seed: 13, base: 226, amp: 8, step: 6, spikes: [0.18, 0.47, 0.78] }),
+          cls: 'lab-tr--coral',
+          wi: 3,
+        },
+      ]
+    : mode === 'strip'
+      ? [{ d: trace({ seed: 31, base: 52, amp: 12, step: 7 }), cls: 'lab-tr--alpha', wi: 0 }]
+      : [
+          {
+            d: trace({ seed: 11, base: 92, amp: 14, step: 8, flatten: 0.55 }),
+            cls: 'lab-tr--alpha',
+            wi: 0,
+          },
+          {
+            d: trace({
+              seed: 29,
+              base: 148,
+              amp: 8,
+              step: 6,
+              flatten: 0.35,
+              spikes: [0.26],
+            }),
+            cls: 'lab-tr--coral',
+            wi: 1,
+          },
+        ];
+
+const vLines = geo.grid ? [120, 240, 360, 480, 600, 720, 840, 960, 1080] : [];
+---
+
+<svg
+  class="lab-wavefield"
+  viewBox={`0 0 ${W} ${geo.h}`}
+  preserveAspectRatio="xMidYMid meet"
+  role={geo.titled ? 'img' : undefined}
+  aria-labelledby={geo.titled ? 'lab-wave-title' : undefined}
+  aria-hidden={geo.titled ? undefined : 'true'}
+>
+  {geo.titled && <title id="lab-wave-title">نمودار تصویری نوار مغزی — چهار کانال</title>}
+  {vLines.map((x) => <line class="lab-wgrid" x1={x} y1="0" x2={x} y2={geo.h} />)}
+  {
+    geo.bases.map((b) => (
+      <line class="lab-wbase" x1="0" y1={b} x2={W} y2={b} />
+    ))
+  }
+  {
+    geo.labels &&
+      geo.bases.map((b, i) => (
+        <text class="lab-wlab" x="12" y={b - 8}>
+          CH-0{i + 1}
+        </text>
+      ))
+  }
+  {
+    traces.map((t) => (
+      <path
+        class={`lab-tr ${t.cls}`}
+        style={`--wi:${t.wi}`}
+        d={t.d}
+        pathLength="1"
+      />
+    ))
+  }
+</svg>

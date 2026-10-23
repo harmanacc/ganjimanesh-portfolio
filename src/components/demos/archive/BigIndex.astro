@@ -1,0 +1,31 @@
+---
+/** Oversized mono numeral. Variants: solid | outline. */
+interface Props {
+  n: string;
+  variant?: 'solid' | 'outline';
+  size?: string;
+}
+const { n, variant = 'solid', size = '5rem' } = Astro.props;
+---
+
+<span
+  class:list={['arch-bignumber', variant === 'outline' && 'is-outline']}
+  style={`--bn-size:${size}`}
+  aria-hidden="true">{n}</span
+>
+
+<style>
+  .arch-bignumber {
+    display: inline-block;
+    font-family: var(--arch-mono, var(--font-mono));
+    font-weight: 500;
+    font-size: var(--bn-size, 5rem);
+    line-height: 1;
+    color: var(--arch-acid, #C6FF3D);
+    font-variant-numeric: tabular-nums;
+  }
+  .arch-bignumber.is-outline {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--arch-acid, #C6FF3D);
+  }
+</style>

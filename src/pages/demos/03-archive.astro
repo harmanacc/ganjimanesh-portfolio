@@ -1,0 +1,668 @@
+---
+import Base from '../../layouts/Base.astro';
+import GrainPlate from '../../components/demos/archive/GrainPlate.astro';
+import BigIndex from '../../components/demos/archive/BigIndex.astro';
+import ProjectPlate from '../../components/demos/archive/ProjectPlate.astro';
+import ScanLine from '../../components/demos/archive/ScanLine.astro';
+import MarqueeTape from '../../components/demos/archive/MarqueeTape.astro';
+
+/* Act ۰ — سیگنال: title card */
+/* Act ۱ — روش: three declaratives */
+const method = [
+  {
+    n: '۱',
+    title: 'خواندن',
+    line: 'پیش از هر عدد، انسان را می‌خوانم: رفتار، گزارش، زمینه.',
+  },
+  {
+    n: '۲',
+    title: 'سنجش',
+    line: 'با QEEG، CANTAB و تست‌های شناختی. آنچه سنجیدنی است، سنجیدنی می‌سازم.',
+  },
+  {
+    n: '۳',
+    title: 'اجرا',
+    line: 'در کلینیک ایماژ پروژه را تا آخرین قدم پیش می‌برم؛ کاری که نایستد.',
+  },
+];
+
+/* Act ۲ — میدان: four scenes in a pinned rail */
+const scenes = [
+  {
+    code: 'A.ORG.EEG',
+    n: '۰۱',
+    variant: 'waveform',
+    title: 'ارزیابی سازمانی مبتنی بر نوار مغزی',
+    org: 'انستیتو مغز ایماژ',
+    role: 'همکار ارزیابی',
+    logline: 'سازمان را با داده‌ی مغز می‌سنجم، نه با حدس. نام سازمان‌ها محرمانه است.',
+  },
+  {
+    code: 'B.PRD.CLINIC',
+    n: '۰۲',
+    variant: 'grid',
+    title: 'پروژه‌های کلینیک ایماژ',
+    org: 'کلینیک ایماژ',
+    role: 'مدیر پروژه',
+    logline: 'پروژه‌های درمانی و آموزشی را از ایده تا اجرا می‌برم؛ تیم، زمان، مسئولیت.',
+  },
+  {
+    code: 'C.WEB.WP',
+    n: '۰۳',
+    variant: 'orbit',
+    title: 'وب‌سایت‌های وردپرسی',
+    org: 'کلینیک آینه، مؤسسه تیبو',
+    role: 'طراح و مسئول سایت',
+    logline: 'سایتی که کار کند و بماند؛ از ساختار محتوا تا نگهداری.',
+  },
+  {
+    code: 'D.RES.DIVERGENT',
+    n: '۰۴',
+    variant: 'type',
+    title: 'تفکر واگرا، تفکر همگرا و گشودگی به تجربه',
+    org: 'پژوهش ارشد',
+    role: 'پژوهشگر',
+    logline: 'کسانی که برای «خود» یاد می‌گیرند یا برای «نشان دادن»، متفاوت فکر می‌کنند؟',
+  },
+] as const;
+
+/* Act ۳ — اثر: credits roll */
+const credits = [
+  'نقشه‌برداری مغزی (QEEG)',
+  'نوروفیدبک و لورتا',
+  'تحریک الکتریکی مغز (tDCS)',
+  'روش‌های تحریک غیرتهاجمی مغز (NIBS)',
+  'تحریک مغناطیسی مغز (TMS)',
+  'ارزیابی شناختی CANTAB',
+  'طراحی تست‌های شناختی با پایتون',
+  'پایتون مقدماتی — CS50',
+  'تربیت پژوهشگر',
+  'مایندفولنس و ذهن‌آگاهی',
+];
+
+const taped = ['روان‌شناسی شناختی', 'سنجش', 'اجرا', 'دقت'];
+---
+
+<Base
+  title="آرشیو سرد — مهدیه گنجی‌منش"
+  description="مهدیه گنجی‌منش — روان‌شناسی شناختی، سنجش، اجرا"
+  bodyClass="arch-body"
+  themeColor="#0B0D0F"
+>
+  <GrainPlate opacity={0.02} />
+  <ScanLine />
+  <a class="arch-skip" href="#arch-main">پرش به محتوا</a>
+
+  <main class="arch" id="arch-main">
+
+    {/* ============ Act ۰ — سیگنال ============ */}
+    <section class="arch-act arch-signal">
+      <p class="arch-sheet mono">فیلم شمارهٔ ۰۳ — آرشیو سرد — توالی تیتراژ</p>
+      <h1 class="arch-name">
+        <span class="arch-mask"><span class="arch-mask-in">مهدیه</span></span>
+        <span class="arch-mask"><span class="arch-mask-in is-acid">گنجی‌منش</span></span>
+      </h1>
+      <p class="arch-logline">
+        <span class="arch-mask"><span class="arch-mask-in">ذهن را پیش از رفتار می‌خوانم.</span></span>
+        <span class="arch-mask"><span class="arch-mask-in">داده را پیش از حدس می‌گذارم.</span></span>
+      </p>
+      <p class="arch-status mono" role="list">
+        <span role="listitem">تهران</span>
+        <span class="arch-dot" aria-hidden="true"></span>
+        <span role="listitem">در حال تحصیل</span>
+        <span class="arch-dot" aria-hidden="true"></span>
+        <span role="listitem">ارزیاب شناختی</span>
+      </p>
+    </section>
+
+    {/* ============ Act ۱ — روش ============ */}
+    <section class="arch-act arch-method">
+      <header class="arch-act-head">
+        <p class="mono arch-act-label" aria-hidden="true">نمای ۰۱ / روش</p>
+        <h2 class="arch-act-title" id="act-method">من می‌خوانم، می‌سنجم، اجرا می‌کنم.</h2>
+      </header>
+      <ol class="arch-method-list">
+        {method.map((m) => (
+          <li class="arch-method-item reveal">
+            <BigIndex n={`۰${m.n}`} variant="outline" size="3rem" />
+            <div>
+              <h3 class="arch-method-name">{m.title}</h3>
+              <p class="arch-p">{m.line}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <MarqueeTape items={taped} />
+
+    {/* ============ Act ۲ — میدان ============ */}
+    <section class="arch-act arch-field" id="arch-field">
+      <header class="arch-field-head">
+        <p class="mono arch-act-label">نمای ۰۲ / میدان</p>
+        <p class="mono arch-hint" aria-hidden="true">چهار صحنه — اسکرول کنید</p>
+      </header>
+      <div class="arch-rail" tabindex="0" aria-label="چهار صحنه از کارها، اسکرول افقی">
+        <ul class="arch-track" id="arch-track">
+          {scenes.map((s) => (
+            <li class="arch-scene">
+              <span class="arch-scene-idx" aria-hidden="true">
+                <BigIndex n={s.n} variant="outline" size="clamp(6rem, 18vw, 15rem)" />
+              </span>
+              <div class="arch-scene-plate">
+                <ProjectPlate variant={s.variant} label={`پرده‌ی گرافیکی صحنه‌ی ${s.n}`} />
+              </div>
+              <h3 class="arch-scene-title">{s.title}</h3>
+              <p class="arch-scene-logline">{s.logline}</p>
+              <footer class="arch-scene-meta mono">
+                <span>{s.code}</span>
+                <span>{s.org}</span>
+                <span class="is-acid">{s.role}</span>
+              </footer>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    {/* ============ Act ۳ — اثر ============ */}
+    <section class="arch-act arch-effect">
+      <header class="arch-act-head">
+        <p class="mono arch-act-label">نمای ۰۳ / اثر</p>
+        <h2 class="arch-act-title">پایان‌نامه و صلاحیت‌ها — تیتراژ پایانی</h2>
+      </header>
+      <div class="arch-credits">
+        <article class="arch-credit reveal">
+          <p class="mono arch-credit-role">پژوهش</p>
+          <p class="arch-thesis">
+            رابطه جهت‌گیری عملکردی و تسلطی با تفکر واگرا و همگرا،
+            با نقش تعدیل‌گر گشودگی به تجربه
+          </p>
+          <p class="mono arch-credit-sub">پایان‌نامه کارشناسی ارشد — روان‌شناسی شناختی</p>
+        </article>
+        <article class="arch-credit reveal">
+          <p class="mono arch-credit-role">صلاحیت‌ها</p>
+          <ul class="arch-credit-list mono">
+            {credits.map((c) => <li>{c}</li>)}
+          </ul>
+        </article>
+        <article class="arch-credit reveal">
+          <p class="mono arch-credit-role">طراحی</p>
+          <p class="arch-p">
+            بیش از ده پروژه طراحی گرافیک و محتوای شبکه‌های اجتماعی — سمت سرد
+            کاری من که همان اصل را رعایت می‌کند: خوانا، دقیق، بدون حاشیه.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    {/* ============ Act ۴ — دعوت ============ */}
+    <section class="arch-act arch-invite">
+      <p class="mono arch-act-label">نمای ۰۴ / دعوت</p>
+      <h2 class="arch-invite-title">پرونده باز است.</h2>
+      <a class="arch-mailto" id="arch-mail" href="mailto:ganimanesh_mahdieh@yahoo.com">
+        ganimanesh_mahdieh@yahoo.com
+      </a>
+      <p class="arch-p arch-invite-note">
+        برای همکاری پژوهشی، ارزیابی سازمانی یا پروژه — ایمیل بزنید. پاسخ می‌دهم.
+      </p>
+    </section>
+
+    <footer class="arch-foot mono">
+      <p>مهدیه گنجی‌منش — تهران — mahdiehgangi.ir</p>
+      <a class="arch-back" href="/demos">← فهرست طرح‌ها</a>
+    </footer>
+
+  </main>
+</Base>
+
+<style is:global>
+  /* ============================================================
+     ۰۳ — آرشیو سرد / Cold Signal — tokens
+     ============================================================ */
+  body.arch-body {
+    --arch-bg: #0B0D0F;
+    --arch-surface: #15191D;
+    --arch-text: #ECE9E2;
+    --arch-muted: #A3A39B;
+    --arch-acid: #C6FF3D;
+    --arch-coral: #FF5C33;
+    --arch-rule: rgba(236, 233, 226, 0.14);
+    --arch-display: var(--font-display);
+    --arch-body: var(--font-body);
+    --arch-mono: var(--font-mono);
+    /* scale */
+    --arch-s1: clamp(3.5rem, 11vw, 12rem);
+    --arch-s2: 2rem;
+    --arch-s3: 1.125rem;
+    --arch-s4: 0.875rem;
+    --arch-s5: 0.6875rem;
+    /* motion */
+    --arch-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --arch-ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+    --arch-dur-press: 120ms;
+    --arch-dur-ui: 180ms;
+    --arch-dur-enter: 420ms;
+    --arch-dur-scene: 720ms;
+    --arch-stagger: 90ms;
+
+    background: var(--arch-bg);
+    color: var(--arch-text);
+    font-family: var(--arch-body);
+  }
+
+  .arch { min-height: 100dvh; background: var(--arch-bg); overflow-x: clip; }
+  .arch * { animation-timing-function: var(--arch-ease-out); }
+
+  .arch .mono {
+    font-family: var(--arch-mono);
+    font-size: var(--arch-s5);
+    color: var(--arch-muted);
+  }
+  .arch .is-acid { color: var(--arch-acid); }
+  .arch-p {
+    margin: 0;
+    font-size: max(1rem, var(--arch-s3));
+    line-height: 2;
+    color: var(--arch-muted);
+    max-width: 38rem;
+  }
+
+  .arch-skip {
+    position: fixed;
+    top: 1rem;
+    inset-inline-start: 1rem;
+    z-index: 90;
+    background: var(--arch-surface);
+    color: var(--arch-acid);
+    padding: 0.6rem 1rem;
+    font-size: var(--arch-s4);
+    text-decoration: none;
+    transform: translateY(-200%);
+    transition: transform var(--arch-dur-ui);
+  }
+  .arch-skip:focus-visible { transform: none; outline: 2px solid var(--arch-acid); }
+
+  /* ---------- section frame ---------- */
+  .arch-act { border-bottom: 1px solid var(--arch-rule); }
+  .arch-act-label { margin: 0 0 clamp(1rem, 3vw, 2rem); color: var(--arch-coral); }
+  .arch-act-title {
+    margin: 0 0 clamp(2rem, 5vw, 3.5rem);
+    font-family: var(--arch-display);
+    font-weight: 800;
+    font-size: clamp(1.6rem, 3.8vw, 3rem);
+    line-height: 1.35;
+  }
+
+  /* ============================================================
+     Act ۰ — سیگنال : title card
+     ============================================================ */
+  .arch-signal {
+    min-height: 96dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: clamp(1.25rem, 4vw, 4rem);
+  }
+  .arch-sheet { margin-bottom: clamp(1.5rem, 4vw, 3rem); }
+
+  .arch-name {
+    margin: 0;
+    font-family: var(--arch-display);
+    font-weight: 800;
+    font-size: var(--arch-s1);
+    line-height: 1.1;
+  }
+  .arch-logline {
+    margin: clamp(1.25rem, 3vw, 2.5rem) 0 0;
+    font-family: var(--arch-display);
+    font-weight: 700;
+    font-size: clamp(1.125rem, 2.4vw, 2rem);
+    line-height: 1.7;
+    color: var(--arch-text);
+  }
+  .arch-logline .arch-mask { display: block; }
+  .arch-status {
+    margin: clamp(1.5rem, 3vw, 2.5rem) 0 0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--arch-text);
+  }
+  .arch-dot {
+    width: 6px;
+    height: 6px;
+    flex: none;
+    background: var(--arch-coral);
+  }
+
+  /* masked line reveal — title card */
+  .arch-mask {
+    display: block;
+    overflow: hidden;
+    /* room for descenders (ی tail) at tight display leading */
+    padding-bottom: 0.14em;
+    margin-bottom: -0.14em;
+  }
+  .arch-mask-in {
+    display: block;
+    transform: translateY(110%);
+    transition: transform var(--arch-dur-scene) var(--arch-ease-in-out);
+  }
+  .arch-card-in .arch-mask:nth-child(1) .arch-mask-in { transition-delay: 0ms; }
+  .arch-card-in .arch-mask:nth-child(2) .arch-mask-in { transition-delay: var(--arch-stagger); }
+  .arch-card-in .arch-mask:nth-child(3) .arch-mask-in { transition-delay: calc(var(--arch-stagger) * 2); }
+  .arch-card-in .arch-mask:nth-child(4) .arch-mask-in { transition-delay: calc(var(--arch-stagger) * 3); }
+  .arch-card-in .arch-mask-in { transform: translateY(0); }
+
+  /* masked name inside html: h1 has two masks; logline has two more */
+  .arch-card-in .arch-name .arch-mask:nth-child(2) .arch-mask-in { transition-delay: var(--arch-stagger); }
+  .arch-card-in .arch-logline .arch-mask:nth-child(1) .arch-mask-in { transition-delay: calc(var(--arch-stagger) * 3); }
+  .arch-card-in .arch-logline .arch-mask:nth-child(2) .arch-mask-in { transition-delay: calc(var(--arch-stagger) * 4); }
+
+  /* ============================================================
+     Act ۱ — روش
+     ============================================================ */
+  .arch-method {
+    padding: clamp(4rem, 10vw, 8rem) clamp(1.25rem, 4vw, 4rem);
+  }
+  .arch-method-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1.5rem, 3vw, 3rem);
+  }
+  .arch-method-item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.25rem;
+    align-items: start;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--arch-rule);
+  }
+  .arch-method-name {
+    margin: 0 0 0.5rem;
+    font-family: var(--arch-display);
+    font-weight: 800;
+    font-size: var(--arch-s2);
+  }
+
+  /* ============================================================
+     Act ۲ — میدان : work rail
+     ============================================================ */
+  .arch-field { padding-top: clamp(4rem, 10vw, 7rem); }
+  .arch-field-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0 clamp(1.25rem, 4vw, 4rem);
+    margin-bottom: 2rem;
+  }
+  .arch-hint { color: var(--arch-coral); }
+
+  .arch-rail {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    padding-bottom: clamp(3rem, 6vw, 5rem);
+  }
+  .arch-rail::-webkit-scrollbar { display: none; }
+  .arch-track {
+    display: flex;
+    list-style: none;
+    gap: clamp(1rem, 2vw, 2rem);
+    margin: 0;
+    padding: 0 clamp(1.25rem, 4vw, 4rem);
+  }
+  .arch-scene {
+    flex: 0 0 min(78vw, 46rem);
+    min-height: 70dvh;
+    scroll-snap-align: start;
+    background: var(--arch-surface);
+    border: 1px solid var(--arch-rule);
+    padding: clamp(1.5rem, 3vw, 2.75rem);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+  .arch-scene-idx {
+    position: absolute;
+    top: -0.3em;
+    inset-inline-start: -0.06em;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+  }
+  .arch-scene-plate {
+    position: relative;
+    z-index: 1;
+    margin: auto 0 1.75rem;
+  }
+  .arch-scene-plate svg { height: clamp(110px, 16vw, 200px); }
+  .arch-scene-title {
+    position: relative;
+    z-index: 1;
+    margin: 0 0 0.75rem;
+    font-family: var(--arch-display);
+    font-weight: 800;
+    font-size: clamp(1.35rem, 2.6vw, 2.1rem);
+    line-height: 1.6;
+  }
+  .arch-scene-logline {
+    position: relative;
+    z-index: 1;
+    margin: 0 0 2rem;
+    max-width: 34rem;
+    line-height: 2;
+    color: var(--arch-muted);
+    font-size: max(1rem, 0.9375rem);
+  }
+  .arch-scene-meta {
+    position: relative;
+    z-index: 1;
+    margin-top: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--arch-rule);
+    font-size: var(--arch-s5);
+  }
+
+  /* ============================================================
+     Act ۳ — اثر : credits roll
+     ============================================================ */
+  .arch-effect {
+    padding: clamp(4rem, 10vw, 8rem) clamp(1.25rem, 4vw, 4rem);
+  }
+  .arch-credits {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: clamp(2rem, 5vw, 4rem);
+  }
+  .arch-credit-role { margin: 0 0 1rem; color: var(--arch-coral); }
+  .arch-credit-sub { margin: 1rem 0 0; }
+  .arch-thesis {
+    margin: 0;
+    font-family: var(--arch-display);
+    font-weight: 800;
+    font-size: clamp(1.5rem, 3vw, 2.4rem);
+    line-height: 1.7;
+    max-width: 40rem;
+  }
+  .arch-credit-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: var(--arch-s4);
+  }
+  .arch-credit-list li {
+    padding: 0.55rem 0;
+    border-bottom: 1px solid var(--arch-rule);
+    line-height: 1.7;
+  }
+  .arch-credit p.arch-p { margin-top: 0; }
+
+  /* reveal blocks — IntersectionObserver adds .is-in */
+  .arch .reveal {
+    transform: translateY(24px);
+    opacity: 0;
+    transition:
+      transform var(--arch-dur-enter) var(--arch-ease-out),
+      opacity var(--arch-dur-enter) var(--arch-ease-out);
+  }
+  .arch .reveal.is-in { transform: none; opacity: 1; }
+  /* stagger siblings inside the same list */
+  .arch-method-item:nth-child(2) { transition-delay: var(--arch-stagger); }
+  .arch-method-item:nth-child(3) { transition-delay: calc(var(--arch-stagger) * 2); }
+
+  /* ============================================================
+     Act ۴ — دعوت : final card
+     ============================================================ */
+  .arch-invite {
+    padding: clamp(5rem, 12vw, 10rem) clamp(1.25rem, 4vw, 4rem);
+    text-align: center;
+  }
+  .arch-invite .arch-act-label { text-align: center; }
+  .arch-invite-title {
+    margin: 0 0 clamp(2rem, 5vw, 4rem);
+    font-family: var(--arch-display);
+    font-weight: 800;
+    font-size: clamp(2rem, 5vw, 4rem);
+    line-height: 1.3;
+  }
+  .arch-mailto {
+    display: inline-block;
+    font-family: var(--font-grotesk, var(--arch-display));
+    font-weight: 700;
+    font-size: clamp(1.25rem, 5vw, 4.25rem);
+    line-height: 1.4;
+    color: var(--arch-text);
+    text-decoration: none;
+    direction: ltr;
+    unicode-bidi: isolate;
+    border-bottom: 3px solid var(--arch-acid);
+    padding-bottom: 0.2em;
+    will-change: transform;
+    transition: color var(--arch-dur-ui), scale var(--arch-dur-press) var(--arch-ease-out);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .arch-mailto:hover { color: var(--arch-acid); }
+    .arch-mailto:active { scale: 0.96; }
+  }
+  .arch-mailto:focus-visible {
+    outline: 2px solid var(--arch-acid);
+    outline-offset: 8px;
+    color: var(--arch-acid);
+  }
+  .arch-invite-note { margin: clamp(2rem, 4vw, 3rem) auto 0; }
+
+  /* ---------- footer ---------- */
+  .arch-foot {
+    padding: 2rem clamp(1.25rem, 4vw, 4rem) 3rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+  .arch-foot p { margin: 0; }
+  .arch-back {
+    color: var(--arch-muted);
+    text-decoration: none;
+    padding: 0.5rem 0.25rem;
+    transition: color var(--arch-dur-ui);
+  }
+  .arch-back:hover,
+  .arch-back:focus-visible { color: var(--arch-acid); }
+  .arch-back:focus-visible { outline: 2px solid var(--arch-acid); outline-offset: 4px; }
+  .arch-back:active { scale: 0.96; }
+
+  @media (hover: hover) and (pointer: fine) {
+    .arch-credit-list li:hover,
+    .arch-credit-list li:focus-visible { color: var(--arch-acid); }
+  }
+
+  /* ============================================================
+     responsive
+     ============================================================ */
+  @media (max-width: 899px) {
+    .arch-method-list { grid-template-columns: 1fr; }
+    .arch-credits { grid-template-columns: 1fr; }
+    .arch-scene { flex-basis: min(86vw, 30rem); }
+    .arch-field-head { margin-bottom: 1.5rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .arch-mask-in { transform: none; transition: none; }
+  }
+</style>
+
+<script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  /* 03-archive — title sequence JS. Reduced motion removes pin & magnet. */
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* 1 — title card + reveals */
+  const card = document.querySelector('.arch-signal');
+  const reveals = document.querySelectorAll('.arch .reveal');
+  if (reduced) {
+    card?.classList.add('arch-card-in');
+    reveals.forEach((el) => el.classList.add('is-in'));
+  } else {
+    requestAnimationFrame(() => card?.classList.add('arch-card-in'));
+    const io = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add('is-in');
+            io.unobserve(e.target);
+          }
+        }),
+      { threshold: 0.25 }
+    );
+    reveals.forEach((el) => io.observe(el));
+  }
+
+  /* 2 — horizontal pin (desktop only, never reduced motion) */
+  const rail = document.querySelector('.arch-rail');
+  const field = document.querySelector('.arch-field');
+  if (!reduced && rail && field && window.matchMedia('(min-width: 900px)').matches) {
+    const railEl = rail as HTMLElement;
+    const track = railEl.querySelector('.arch-track') as HTMLElement;
+    /* clip the track while GSAP translates it — never let it widen the page */
+    railEl.style.overflow = 'hidden';
+    railEl.style.scrollSnapType = 'none';
+    const getDist = () => track.scrollWidth - window.innerWidth;
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.to(track, {
+      x: () => getDist(), /* RTL: overflow extends to the left */
+      ease: 'none',
+      scrollTrigger: {
+        trigger: field,
+        pin: true,
+        scrub: 1,
+        end: () => '+=' + getDist(),
+        invalidateOnRefresh: true,
+        anticipatePin: 1,
+      },
+    });
+  }
+
+  /* 3 — magnetic mailto (fine pointer only) */
+  const mail = document.getElementById('arch-mail') as HTMLElement | null;
+  if (mail && !reduced && window.matchMedia('(pointer: fine)').matches) {
+    mail.addEventListener('mousemove', (e) => {
+      const r = mail.getBoundingClientRect();
+      const mx = e.clientX - (r.left + r.width / 2);
+      const my = e.clientY - (r.top + r.height / 2);
+      mail.style.transform = `translate(${mx * 0.1}px, ${my * 0.18}px)`;
+    });
+    mail.addEventListener('mouseleave', () => { mail.style.transform = ''; });
+  }
+</script>
